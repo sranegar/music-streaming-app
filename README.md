@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# My Music Streaming Single Page Application Client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application consumes web service data provided by my music-streaming-API server created in PHP using RESTful APIs and MariaDB. This application allows users to search for music and admin privileges include CRUD operations.
+
+Admin Login:
+username: admin
+password: password
 
 ## Available Scripts
 
@@ -68,3 +72,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
