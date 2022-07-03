@@ -1,10 +1,11 @@
-# My Music Streaming Single Page Application Client
+# 🎵 Music Streaming Application
 
-This application consumes web service data provided by my music-streaming-API server created in PHP using RESTful APIs and MariaDB. This application allows users to search for music and admin privileges include CRUD operations.
+Single page application client that consumes web service data provided by my music-streaming-API server created in PHP using RESTful APIs and MariaDB. 
 
 Admin Login:
 username: admin
 password: password
+
 
 ## Available Scripts
 
