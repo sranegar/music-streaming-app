@@ -1,0 +1,167 @@
+.album-card {
+    background-color: #0b0b0b !important;
+    border-radius: 2.5px !important;
+    transition: all 0.2s;
+}
+
+.album-card:hover {
+    transition: 0.2s;
+    background-color: #151515 !important;
+    cursor: pointer !important;
+}
+
+.album-page-grid {
+    box-shadow: none !important;
+}
+
+
+.albums-container {
+    background-color: #040404 !important;
+    border: 1px solid #1b1b1b !important;
+    width: 100% !important;
+}
+
+ 
+
+.track-list-item:hover {
+    color: #c724ac !important;
+    background-color: #0b0b0b !important;
+}
+
+select {
+    width: 120px;
+    font-size: 13px;
+    height: 35px;
+    border-radius: 4px;
+    color: #eee9e9;
+    background-color: rgb(6, 6, 6);
+    cursor: pointer;
+    padding: 5px;
+}
+
+/*
+*  styles for album-related elements
+ */
+.album-container{
+    margin: 10px auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.album-container > div:nth-child(odd) {
+    background-color: #f8f9fa;
+}
+.album-row {
+    width: 100%;
+    min-height: 35px;
+    padding-left: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid #e4f1fe;
+}
+
+.album-row-header {
+    font-weight: bold;
+    font-size: 14px;
+    color: #22252c;
+    background-color: #cccccc !important;
+    border-top: 1px solid #e4f1fe;
+}
+
+.album-row .album-info {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+
+
+/* styles for the add album row */
+.album-row input {
+    border: 1px solid #cccccc;
+    width: 100%;
+    padding: 0px 5px;
+}
+
+
+/* styles for edit and delete buttons */
+
+.album-row .album-buttons {
+    min-width: 190px;
+    text-align: right;
+}
+
+button.button-light {
+    margin: 0px 2px;
+    width: 75px;
+    border: #4D90C6 solid 1px;
+    border-radius: 0.25rem;
+}
+
+button.button-create {
+    margin: 0px 2px;
+    padding: 2px 10px;
+    border: #4D90C6 solid 1px;
+    border-radius: 0.25rem;
+}
+
+button.button-light:hover,
+button.button-create:hover
+{
+    color: #212529;
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+}
+
+button:disabled,
+button[disabled],
+button:disabled:hover {
+    border-color: #cccccc;
+    background-color: rgba(239, 239, 239, 0.3);
+    color: rgba(16, 16, 16, 0.3)
+}
+
+/* styles for the create and edit album forms */
+.form-album .form-group {
+    display: flex;
+    padding: 10px 5px;
+}
+
+.form-album .form-group label {
+    width: 100px;
+    margin-top: 6px;
+    margin-right: 10px;
+    text-align: right;
+    font-weight: 500;
+}
+
+.form-album .form-group input {
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+textarea {
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.form-album-errors {
+    font-size: small;
+    color: red;
+}
+
+.form-album label{
+    color: #000;
+}
+
+ul {
+    color: #000;
+    list-style: none;
+}

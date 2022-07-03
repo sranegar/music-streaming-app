@@ -1,0 +1,95 @@
+.cur-artist-container {
+  background-color: #070707 !important;
+}
+
+.artist-image-container {
+ 
+  background-color: #040404 !important;
+  box-shadow: none !important;
+  padding: 10px !important;
+}
+
+.artist-image {
+  min-height: 100%;
+  transition: all 0.2s;
+  opacity: 88%;
+}
+
+.artist-image:hover {
+  transition: 0.2s;
+  opacity: 100%;
+}
+
+.artist-image:hover + .artist-name {
+  transition: 0.2s;
+  color: rgb(242, 242, 242) !important;
+}
+
+.artist-name {
+  margin-top: 10px;
+  font-weight: lighter;
+  font-variant-caps: all-petite-caps;
+}
+
+.artist-view-image {
+  opacity: 86% !important;
+  border-style:solid;
+  border-width:5px;
+  border-radius: 3%;
+  border-color:rgb(8, 8, 8);
+  box-shadow: 0px 0px 30px rgb(17, 17, 17);
+}
+
+.image-group {
+    padding: 40px;
+}
+
+.album-cover-img {
+  max-height: 300px;
+  max-width: 300px;
+}
+
+.artist-image-container-two {
+box-shadow: none !important;
+border-radius: 50%!important;
+overflow: hidden !important;
+}
+
+.cover-photo {
+  min-height: 380px;
+ 
+  transition: all 0.2s;
+  opacity: 88%;
+}
+
+.device {
+  display: none !important;
+}
+
+.track-row {
+    cursor: pointer;
+}
+
+.track-row:hover {
+     background-color: #0b0b0b !important;
+}
+
+.track-row:hover > i {
+    color: #21B744;
+}
+
+ 
+
+@media screen and (max-width: 766px) {
+  .artist-image {
+    min-height: 295px;
+  }
+
+  .device {
+    display: flex !important;
+  }
+
+  .desktop {
+    display: none !important;
+  }
+}

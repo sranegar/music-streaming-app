@@ -1,0 +1,42 @@
+body {
+    background-color: rgb(0, 0, 0);
+    font-family: Helvetica;
+
+}
+
+p {
+    font-size: 12px;
+    letter-spacing: .6px;
+    line-height: 1.4;
+}
+
+h2 {
+    font-size: 32px !important;
+    font-weight: lighter !important;
+    color: rgba(226, 225, 227, 0.84) !important;
+}
+
+h3 {
+    font-size: 22px !important;
+    color: rgba(226, 225, 227, 0.84) !important;
+}
+
+h4 {
+    font-weight: lighter !important;
+    font-size: 16px !important;
+}
+
+h5 {
+    font-weight: 200 !important;
+    font-size: 14px !important;
+}
+
+h6 {
+    font-weight: 100 !important;
+    font-size: 12px !important;
+    color: rgba(167, 167, 167, 0.7) !important;
+}
+
+label {
+    color: white;
+}

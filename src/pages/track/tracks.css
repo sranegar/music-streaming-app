@@ -1,0 +1,120 @@
+.track-card {
+    background-color: #0b0b0b !important;
+    border-radius: 2.5px !important;
+    transition: all 0.2s;
+    position: relative;
+
+}
+
+.track-card:hover {
+    transition: 0.2s;
+    background-color: #151515 !important;
+    cursor: pointer !important;
+}
+
+
+.img-container {
+
+    height: 400px !important;
+    width: 400px !important;
+}
+
+.tracks-container {
+    background-color: #040404 !important;
+    border: 1px solid #1b1b1b !important;
+    width: 100% !important;
+}
+
+.track-card:hover > .play-btn {
+    display: flex !important;
+    transition: all 1s !important;
+
+}
+
+.track-list-item {
+
+}
+
+.track-list-item:hover {
+    color: #c724ac !important;
+    background-color: #0b0b0b !important;
+}
+
+
+.play-btn {
+    position: absolute !important;
+    left: 12px;
+    bottom: 12px;
+    transition: all 1s !important;
+    display: none !important;
+}
+
+.play-btn:hover {
+    transition: all 0.5s !important;
+}
+
+.music-player {
+   margin-left: 900px;
+}
+
+audio::-webkit-media-controls-panel {
+    background-color: #474747;
+
+}
+
+audio::-webkit-media-controls-play-button {
+    background-color: rgba(27, 27, 27, 0.79);
+    border-radius: 50%;
+}
+
+audio::-webkit-media-controls-play-button:hover {
+    background-color: rgb(13, 13, 13);
+}
+
+audio::-webkit-media-controls-current-time-display {
+    color: #fff;
+}
+
+audio::-webkit-media-controls-time-remaining-display {
+    color: #fff;
+}
+
+.tbl-header {
+    font-size: 15px;
+    font-variant-caps: small-caps;
+    font-weight: lighter !important;
+}
+
+.tbl-cell {
+    color: #aeaeae;
+    font-size: 12px;
+}
+
+.tbl-title {
+    color: #dddddd ;
+    font-size: 14px;
+    font-weight: bolder ;
+}
+
+.tbl-artist {
+    color: #aeaeae;
+    font-size: 13px;
+    font-weight: lighter ;
+}
+
+.tbl-row {
+    max-height: 10px !important;
+}
+
+
+select {
+    width: 80px;
+    font-size: 12px;
+    height: 28px;
+    border-radius: 4px;
+    color: #c8c8c8;
+    background-color: rgb(6, 6, 6);
+    cursor: pointer;
+    padding: 2px;
+
+}
