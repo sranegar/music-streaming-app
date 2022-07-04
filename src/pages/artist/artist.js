@@ -27,11 +27,10 @@ import { faCompactDisc, faMusic } from "@fortawesome/free-solid-svg-icons";
 
 import { useAuth } from "../../services/useAuth";
 
-const Artist = () => {
-  const [curPlaying, setCurplaying] = useState(null);
+const Artist = ({setCurplaying}) => {
+ 
   const { user } = useAuth();
   const [subHeading, setSubHeading] = useOutletContext();
-
   const { artistId } = useParams();
   let navigate = useNavigate();
   const url = settings.baseApiUrl + "/artists/" + artistId;
@@ -46,7 +45,7 @@ const Artist = () => {
     navigate(`/artists`);
   }
 
-  console.log(artist);
+  console.log(props);
   return (
     <Segment basic>
       {error && <div>{error}</div>}
@@ -69,12 +68,13 @@ const Artist = () => {
       )}
 
       {artist && (
-        <Grid centered padded stackable doubling>
+        <Grid centered stackable doubling>
           {setSubHeading(artist.name)}
-          <Grid.Row centered>
+          <Grid.Row style={{ padding: "0px 40px" }}>
             <Grid.Column width={8}>
-              <Segment basic className="artist-image-container desktop">
+              <Segment className="artist-image-container desktop">
                 <Image
+                  size="huge"
                   className="cover-photo desktop"
                   src={artist.image}
                   alt={artist.name}
@@ -89,16 +89,33 @@ const Artist = () => {
                   alt={artist.name}
                 />
               </Segment>
-              <Segment basic className="desktop">
-                <Header inverted as="h3" style={{ paddingBottom: "10px" }}>
+              <Grid.Row
+           
+                style={{
+                  overflow: "hidden",
+                  padding: "0px 12px 30px" 
+             
+                }}
+              >
+               
+              </Grid.Row>
+              {/* <Segment basic className="desktop">
+                <Header
+                  inverted
+                  style={{
+                    color: "#e2e1e3d6 ",
+                    fontVariantCaps: "all-petite-caps",
+                    fontSize: "18px",
+                  }}
+                >
                   About
                 </Header>
                 <p style={{ color: "white", lineHeight: 1.8 }}>
                   {artist.description}
                 </p>
-              </Segment>
+              </Segment> */}
             </Grid.Column>
-            <Grid.Column width={7}>
+            <Grid.Column width={8}>
               <Segment
                 basic
                 className="top-tracks-container"
@@ -136,42 +153,47 @@ const Artist = () => {
                       unordered
                       style={{
                         color: "white",
-                        padding: "2px",
-                        borderBottom: ".3px solid #e2e1e3d6",
+                        padding: "6px",
+                        borderBottom: ".5px solid #e2e1e3d6",
                       }}
                       className="tracks-list"
                     >
                       <List.Item
                         className="track-row"
                         onClick={() => {
-                          setCurplaying(t.mp3file);
+                         setCurplaying(t.mp3file);
                         }}
+                        style={{ padding: "6px" }}
                       >
                         <List.Icon
                           verticalAlign="middle"
                           size="large"
                           name="play circle"
                         />
-                        <List.Content
-                          verticalAlign="middle"
-                          style={{ padding: "6px" }}
-                        >
+                        <List.Content verticalAlign="middle">
                           {t.title}
                         </List.Content>
                       </List.Item>
                     </List>
                   ))}
               </Segment>
-              <Grid.Row style={{ overflow: "hidden", paddingTop: "30px" }}>
-                {curPlaying && (
-                  <audio src={curPlaying} autoPlay={true} controls />
-                )}
-              </Grid.Row>
             </Grid.Column>
           </Grid.Row>
-          <Grid doubling centered style={{ margin: "0px" }}>
-            <Grid.Column width={15}>
-              <Header as="h3" inverted>
+          <Grid
+            doubling
+            centered
+            style={{ margin: "0px", minWidth: "100%", paddingBottom: "50px" }}
+          >
+            <Header
+              as="h3"
+              inverted
+              className="device"
+              style={{ minWidth: "100%", padding: "20px 20px 0px" }}
+            >
+              Albums
+            </Header>
+            <Grid.Column width={16} className="artist-albums-container">
+              <Header as="h3" inverted className="desktop">
                 Albums
               </Header>
               <Segment basic style={{ padding: "0px" }}>

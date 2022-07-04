@@ -14,8 +14,9 @@ import {useAuth} from "../services/useAuth";
 import {useState} from 'react';
 
 
-const TopNav = () => {
-    const [showMenu, setShowMenu] = useState(false)
+const TopNav = ({curPlaying}) => {
+  const [showMenu, setShowMenu] = useState(false)
+ 
     const {isAuthed, user} = useAuth();
     const className = ({isActive}) => isActive ? "nav-link active" : "nav-link";
 
@@ -135,7 +136,7 @@ const TopNav = () => {
             </NavLink>
           </Grid.Column> */}
 
-          <Grid.Column textAlign="center" >
+          <Grid.Column textAlign="center">
             <Icon
               name="home"
               style={{ color: "#9e9e9e ", marginRight: "4px" }}
@@ -145,7 +146,7 @@ const TopNav = () => {
             </NavLink>
           </Grid.Column>
 
-          <Grid.Column textAlign="center"  >
+          <Grid.Column textAlign="center">
             <Icon
               name="search"
               style={{ color: "#9e9e9e", marginRight: "4px" }}
@@ -155,7 +156,7 @@ const TopNav = () => {
             </NavLink>
           </Grid.Column>
 
-          <Grid.Column textAlign="center" >
+          <Grid.Column textAlign="center">
             <NavLink verticalAlign="middle" className="nav-links" to="/albums">
               albums
             </NavLink>
@@ -165,7 +166,9 @@ const TopNav = () => {
               Library
             </NavLink>
           </Grid.Column> */}
-
+          <Grid.Column width={6}>
+            <audio src={curPlaying} autoPlay={true} controls />
+          </Grid.Column>
           <Grid.Column width={2} floated="right">
             {isAuthed ? (
               <Button

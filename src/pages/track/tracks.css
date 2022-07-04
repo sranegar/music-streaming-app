@@ -53,31 +53,45 @@
     transition: all 0.5s !important;
 }
 
-.music-player {
-   margin-left: 900px;
+audio {
+    width: 100% !important;
+    border: none !important;
 }
 
+ 
 audio::-webkit-media-controls-panel {
-    background-color: #474747;
-
+    background-color: #1e1e1e;
+    border: none;
+    padding: 10px 20px;
 }
 
 audio::-webkit-media-controls-play-button {
-    background-color: rgba(27, 27, 27, 0.79);
-    border-radius: 50%;
+    background-color: rgba(205, 205, 205, 0.79);
+    border-radius: 50%;  
+    transition: 0.3s;
+ 
 }
 
+audio::-webkit-media-controls-play-button:hover {transform: scale(1.1);  transition:  0.3s; filter: drop-shadow(2px 3px 3px rgb(14, 14, 14));}
+
 audio::-webkit-media-controls-play-button:hover {
-    background-color: rgb(13, 13, 13);
+    background-color: rgb(202, 202, 202);
 }
 
 audio::-webkit-media-controls-current-time-display {
-    color: #fff;
+    color: rgba(255, 255, 255);
+    font-size: 12px;
+    padding-left: 10px;
 }
 
 audio::-webkit-media-controls-time-remaining-display {
-    color: #fff;
+    color: rgba(255, 255, 255, 0.500);
+         font-size: 12px;
+            padding-right: 10px;
 }
+
+ 
+ 
 
 .tbl-header {
     font-size: 15px;

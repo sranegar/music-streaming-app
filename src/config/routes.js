@@ -22,13 +22,20 @@ import {Tracks, TracksByAlbum} from "../pages/track/tracks";
 
 import {AuthProvider} from "../services/useAuth";
 import RequireAuth from "../components/RequireAuth";
+import { useState } from "react";
 
 const AppRoutes = () => {
+    const [curPlaying, setCurplaying] = useState(null);
     return (
       <BrowserRouter>
         <AuthProvider>
           <Routes>
-            <Route path="/" element={<Body />}>
+            <Route
+              path="/"
+              element={
+                <Body curPlaying={curPlaying} setCurplaying={setCurplaying} />
+              }
+            >
               <Route index element={<Home />} />
               <Route index element={<Search />} />
               <Route
@@ -39,7 +46,10 @@ const AppRoutes = () => {
                   </RequireAuth>
                 }
               >
-                <Route path=":artistId" element={<Artist />}>
+                <Route
+                  path=":artistId"
+                  element={<Artist setCurplaying={setCurplaying} />}
+                >
                   <Route path="albums" element={<AlbumsByArtist />}>
                     <Route path=":albumId" element={<AlbumByArtist />} />
                   </Route>

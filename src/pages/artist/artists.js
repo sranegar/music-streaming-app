@@ -64,16 +64,6 @@ const Artist = () => {
 
   return (
     <Grid columns={1} centered style={{ padding: "0px 5px" }}>
-      {artistView ? (
-        ""
-      ) : (
-        <Grid.Column className='desktop'>
-          <Header as="h3" inverted style={{ padding: "30px 30px 0px" }}>
-            Artists <span>/ {subHeading}</span>
-          </Header>
-        </Grid.Column>
-      )}
-
       {error && <div>{error}</div>}
       <Grid.Row>
         <Outlet context={[subHeading, setSubHeading]} />
@@ -91,8 +81,8 @@ const Artist = () => {
       )}
 
       {artists && (
-        <Grid padded style={{ minHeight: "100vh" }}>
-          <Grid.Column width={16} className="device">
+        <Grid centered style={{ minHeight: "100vh", padding: '10px 14px 40px'}}>
+          <Grid.Column width={15} className="searchbar-mobile device">
             <Form
               className="device"
               inverted
@@ -101,6 +91,7 @@ const Artist = () => {
               onSubmit={handleSearch}
             >
               <Form.Input
+                size="small"
                 width={16}
                 id="artist-search-term"
                 placeholder="Search artists..."
@@ -108,16 +99,12 @@ const Artist = () => {
             </Form>
           </Grid.Column>
 
-          <Grid.Column width={12} className="desktop">
-            <Form
-              inverted
-              size="small"
-              style={{ paddingLeft: "50px" }}
-              onSubmit={handleSearch}
-            >
+          <Grid.Column width={14} className="desktop">
+            <Form inverted size="small" onSubmit={handleSearch}>
               <Form.Group>
                 <Form.Input
-                  width={12}
+                  width={14}
+                  size="small"
                   className="desktop"
                   id="artist-search-term"
                   placeholder="Search artists..."
@@ -125,11 +112,13 @@ const Artist = () => {
                 <Button
                   className="desktop"
                   inverted
+                  size="small"
                   color="grey"
                   type="submit"
                   icon="search"
                 />
                 <Button
+                  size="small"
                   className="desktop"
                   basic
                   inverted
@@ -141,11 +130,31 @@ const Artist = () => {
               </Form.Group>
             </Form>
           </Grid.Column>
+          {artistView ? (
+            ""
+          ) : (
+            <Grid
+              className="desktop"
+              style={{
+                padding: "20px 0px",
+                minWidth: "98%",
+              }}
+            >
+              <Header
+                textAlign="left"
+                as="h3"
+                inverted
+                style={{ padding: "20px 50px 10px" }}
+              >
+                Artists <span>/ {subHeading}</span>
+              </Header>
+            </Grid>
+          )}
           <Grid.Row></Grid.Row>
           <Card.Group
             doubling
             stackable
-            itemsPerRow={5}
+            itemsPerRow={3}
             className="image-group"
             size="medium"
             style={{
@@ -163,7 +172,17 @@ const Artist = () => {
                     <Image
                       centered
                       fluid
-                      className="artist-image"
+                      size="massive"
+                      className="artist-image desktop"
+                      src={artist.image}
+                      alt={artist.name}
+                      style={{ minHeight: "300px" }}
+                    />
+
+                    <Image
+                      centered
+                      fluid
+                      className="artist-image-mobile device"
                       src={artist.image}
                       alt={artist.name}
                       style={{ minHeight: "170px" }}
