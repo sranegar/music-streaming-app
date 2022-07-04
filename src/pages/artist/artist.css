@@ -3,16 +3,36 @@
 }
 
 .artist-image-container {
- 
   background-color: #040404 !important;
   box-shadow: none !important;
   padding: 10px !important;
 }
 
+.artist-image-container-device {
+  padding: 0px !important;
+  margin: 0px !important;
+}
+
 .artist-image {
-  min-height: 100%;
   transition: all 0.2s;
   opacity: 88%;
+}
+
+.artist-image-device {
+  min-height: 300px !important;
+  min-width: 98% !important;
+}
+
+.artist-card {
+  background-color: #0b0b0b !important;
+  border-radius: 2.5px !important;
+  transition: all 0.2s;
+  padding: 10px;
+  margin: 0px 10px 30px !important;
+}
+
+.artist-page-grid {
+  box-shadow: none !important;
 }
 
 .artist-image:hover {
@@ -20,44 +40,86 @@
   opacity: 100%;
 }
 
+.artist-name {
+  color: #e2e1e3d6 !important;
+  margin: 8px 8px 0px;
+  font-size: 16px;
+  font-weight: lighter;
+  font-variant-caps: all-petite-caps;
+}
+
 .artist-image:hover + .artist-name {
   transition: 0.2s;
   color: rgb(242, 242, 242) !important;
 }
 
-.artist-name {
-  margin-top: 10px;
-  font-weight: lighter;
-  font-variant-caps: all-petite-caps;
-}
-
 .artist-view-image {
   opacity: 86% !important;
-  border-style:solid;
-  border-width:5px;
+  border-style: solid;
+  border-width: 5px;
   border-radius: 3%;
-  border-color:rgb(8, 8, 8);
+  border-color: rgb(8, 8, 8);
   box-shadow: 0px 0px 30px rgb(17, 17, 17);
 }
 
 .image-group {
-    padding: 40px;
+  padding: 40px;
+}
+ 
+ 
+ 
+.album-card {
+  background-color: #232323;
+  box-shadow: none;
+  box-shadow: none !important;
+  overflow: hidden !important;
+  min-height: 200px !important;
+  margin: 15px 18px !important;
+  width: 14% !important;
 }
 
+.prev-icon {
+  color: #e2e1e349 !important;
+  cursor: pointer;
+  padding-left: 30px;
+  transition: 0.2s;
+}
+
+.prev-icon:hover {
+  transition: 0.2s;
+  color: #e2e1e3d6 !important;
+}
+.album-header {
+  color: #e2e1e3d6 !important;
+  padding: 8px 8px 0px;
+  font-size: 14px !important;
+  font-weight: bolder;
+  min-height: 58px;
+}
+
+.album-meta {
+  color: #e2e1e38d !important;
+  padding: 0px 8px 8px;
+  margin: 0px !important;
+  font-size: 14px !important;
+  font-weight: lighter;
+}
+
+ 
 .album-cover-img {
   max-height: 300px;
   max-width: 300px;
 }
 
 .artist-image-container-two {
-box-shadow: none !important;
-border-radius: 50%!important;
-overflow: hidden !important;
+  box-shadow: none !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
 }
 
 .cover-photo {
   min-height: 380px;
- 
+
   transition: all 0.2s;
   opacity: 88%;
 }
@@ -67,23 +129,60 @@ overflow: hidden !important;
 }
 
 .track-row {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .track-row:hover {
-     background-color: #0b0b0b !important;
+  background-color: #0b0b0b !important;
 }
 
 .track-row:hover > i {
-    color: #21B744;
+  color: #21b744;
 }
-
- 
 
 @media screen and (max-width: 766px) {
   .artist-image {
     min-height: 295px;
   }
+
+ 
+   .artist-name-device {
+  font-size: 20px !important;
+ }
+ 
+ .album-card {
+  margin: 30px 10px !important;
+  width: 18% !important;
+ }
+
+ .artist-image-device {
+  min-height: 300px !important;
+  min-width: 96% !important;
+}
+
+ .album-header {
+  padding: 6px 10px 3px !important;
+  font-size: 16px !important;
+  min-height: 46px !important;
+ }
+
+ .album-meta {
+  font-size: 16px !important;
+  padding: 0px 10px 6px !important;
+ }
+
+ .album-group {
+  padding: 30px 10px !important;
+ }
+
+.top-tracks {
+  max-width: 500px !important;
+}
+
+ .top-tracks-container {
+  padding: 0px 6px !important;
+  margin-top: 0px !important;
+ }
 
   .device {
     display: flex !important;
@@ -92,4 +191,11 @@ overflow: hidden !important;
   .desktop {
     display: none !important;
   }
+}
+
+@media screen and (max-width: 400px) {
+   .artist-image-device {
+ 
+  border-radius: 50% !important;
+}
 }

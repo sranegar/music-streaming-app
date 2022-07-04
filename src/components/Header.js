@@ -37,89 +37,182 @@ const TopNav = () => {
     }
 
     return (
+      <Grid
+        className="nav-bar"
+        columns={8}
+        reversed
+        centered
+        padded
+        stackable
+        verticalAlign="middle"
+        style={{ backgroundColor: "#312a77" }}
+      >
+        <Grid.Column className="device">
+          <Icon
+            name="bars"
+            color="grey"
+            size="large"
+            onClick={handleOnClick}
+            style={{ cursor: "pointer" }}
+          />
+        </Grid.Column>
 
-        <Grid className='nav-bar' columns={12} reversed centered padded stackable verticalAlign='middle'
-              style={{backgroundColor: '#312a77'}}>
-
-            <Grid.Column className='device'>
-                <Icon name='bars' color='grey' size='large' onClick={handleOnClick} style={{cursor: 'pointer'}}/>
+        {showMenu && (
+          <Grid.Row className="device">
+            <Grid.Column textAlign="center">
+              <NavLink
+                className="nav-links"
+                to="/"
+                onClick={() => setShowMenu(false)}
+              >
+                Home
+              </NavLink>
             </Grid.Column>
 
-            {showMenu &&
-                <Grid.Row className='device'>
-                    <Grid.Column textAlign='center'>
-                        <NavLink className='nav-links' to="/" onClick={() => setShowMenu(false)}>Home</NavLink>
-                    </Grid.Column>
-                    <Grid.Column textAlign='center'>
-                        <NavLink className='nav-links' to="/artists"
-                                 onClick={() => setShowMenu(false)}>Artists</NavLink>
-                    </Grid.Column>
-                    <Grid.Column textAlign='center'>
-                        <NavLink className='nav-links' to="/albums" onClick={() => setShowMenu(false)}>Albums</NavLink>
-                    </Grid.Column>
-                    <Grid.Column textAlign='center'>
-                        <NavLink className='nav-links' to="/tracks" onClick={() => setShowMenu(false)}>Tracks</NavLink>
-                    </Grid.Column>
-                    <Grid.Column>
-                        {isAuthed
-                            ? <Button fluid className='logout-btn'  compact size='tiny' basic color='grey'> <Dropdown
-                                trigger={<span><Icon size='large' name='user circle' color='green'
-                                                     style={{marginRight: '8px'}}/>{user.name} </span>} options={options}/></Button>
-                            :
-                            <NavLink to="/signin" className={className}> <Button className='login-btn' fluid basic inverted
-                                                                                 color='teal' content='Login' icon='user'
-                                                                                 size='small'
-                            ></Button></NavLink>
-                        }
+            <Grid.Column textAlign="center">
+              <NavLink
+                className="nav-links"
+                to="/artists"
+                onClick={() => setShowMenu(false)}
+              >
+                Music
+              </NavLink>
+            </Grid.Column>
 
-                    </Grid.Column>
-                </Grid.Row>
-            }
-
-            <Grid.Row className='desktop'>
-                <Grid.Column>
-                    <NavLink to="/">
-                        <FontAwesomeIcon className='logo' icon={faHeadphonesSimple} size="3x"/>
-                    </NavLink>
-                </Grid.Column>
-
-                <Grid.Column textAlign='center'>
-                    <NavLink className='nav-links' to="/">Home</NavLink>
-                </Grid.Column>
-
-                <Grid.Column textAlign='center'>
-                    <NavLink className='nav-links' to="/artists">Artists</NavLink>
-                </Grid.Column>
-
-                <Grid.Column textAlign='center'>
-                    <NavLink className='nav-links' to="/albums">Albums</NavLink>
-                </Grid.Column>
-
-                <Grid.Column textAlign='center'>
-                    <NavLink className='nav-links' to="/tracks">Tracks</NavLink>
-                </Grid.Column>
-
-                <Grid.Column width={6}>
-
-                </Grid.Column>
-                <Grid.Column width={2}>
-                    {isAuthed
-                        ? <Button className='logout-btn' fluid compact size='tiny' basic inverted circular> <Dropdown
-                            trigger={<span><Icon size='large' name='user circle' color='green'
-                                                 style={{marginRight: '8px'}}/>{user.name} </span>} options={options}/></Button>
-                        :
-                        <NavLink to="/signin" className={className}> <Button className='login-btn' fluid basic inverted
-                                                                             color='teal' content='Login' icon='user'
-                                                                             size='small'
-                        ></Button></NavLink>
+            <Grid.Column>
+              {isAuthed ? (
+                <Button
+                  fluid
+                  className="logout-btn"
+                  compact
+                  size="tiny"
+                  basic
+                  color="grey"
+                >
+                  {" "}
+                  <Dropdown
+                    trigger={
+                      <span>
+                        <Icon
+                          size="large"
+                          name="user circle"
+                          color="green"
+                          style={{ marginRight: "8px" }}
+                        />
+                        {user.name}{" "}
+                      </span>
                     }
+                    options={options}
+                  />
+                </Button>
+              ) : (
+                <NavLink to="/signin" className={className}>
+                  {" "}
+                  <Button
+                    className="login-btn"
+                    fluid
+                    basic
+                    inverted
+                    color="teal"
+                    content="Login"
+                    icon="user"
+                    size="small"
+                  ></Button>
+                </NavLink>
+              )}
+            </Grid.Column>
+          </Grid.Row>
+        )}
 
-                </Grid.Column>
+        <Grid.Row className="desktop">
+          {/* <Grid.Column>
+            <NavLink to="/">
+              <FontAwesomeIcon
+                className="logo"
+                icon={faHeadphonesSimple}
+                size="3x"
+              />
+            </NavLink>
+          </Grid.Column> */}
 
-            </Grid.Row>
-        </Grid>
+          <Grid.Column textAlign="center" >
+            <Icon
+              name="home"
+              style={{ color: "#9e9e9e ", marginRight: "4px" }}
+            />
+            <NavLink verticalAlign="middle" className="nav-links" to="/">
+              Home
+            </NavLink>
+          </Grid.Column>
 
-    )
+          <Grid.Column textAlign="center"  >
+            <Icon
+              name="search"
+              style={{ color: "#9e9e9e", marginRight: "4px" }}
+            />
+            <NavLink className="nav-links" to="/artists">
+              Music
+            </NavLink>
+          </Grid.Column>
+
+          <Grid.Column textAlign="center" >
+            <NavLink verticalAlign="middle" className="nav-links" to="/albums">
+              albums
+            </NavLink>
+          </Grid.Column>
+          {/* <Grid.Column textAlign="center">
+            <NavLink className="nav-links" to="/library">
+              Library
+            </NavLink>
+          </Grid.Column> */}
+
+          <Grid.Column width={2} floated="right">
+            {isAuthed ? (
+              <Button
+                className="logout-btn"
+                fluid
+                compact
+                size="tiny"
+                basic
+                inverted
+                circular
+              >
+                {" "}
+                <Dropdown
+                  trigger={
+                    <span>
+                      <Icon
+                        size="large"
+                        name="user circle"
+                        color="green"
+                        style={{ marginRight: "8px" }}
+                      />
+                      {user.name}{" "}
+                    </span>
+                  }
+                  options={options}
+                />
+              </Button>
+            ) : (
+              <NavLink to="/signin" className={className}>
+                {" "}
+                <Button
+                  className="login-btn"
+                  fluid
+                  basic
+                  inverted
+                  color="teal"
+                  content="Login"
+                  icon="user"
+                  size="small"
+                ></Button>
+              </NavLink>
+            )}
+          </Grid.Column>
+          <Grid.Column width={1}></Grid.Column>
+        </Grid.Row>
+      </Grid>
+    );
 }
 
 export default TopNav;

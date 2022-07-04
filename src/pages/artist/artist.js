@@ -1,10 +1,3 @@
-/*
-Name: Stephanie Ranegar
-Date: 6/10/2022
-File: artistjs
-Description: Create a component to display artist details
-*/
-
 import { useState } from "react";
 import { settings } from "../../config/config";
 import {
@@ -18,10 +11,16 @@ import {
   Divider,
   List,
   Card,
+  Icon,
 } from "semantic-ui-react";
 import "./artist.css";
 import useXmlHttp from "../../services/useXmlHttp";
-import { useParams, Link, useOutletContext, Outlet } from "react-router-dom";
+import {
+  useParams,
+  Link,
+  useOutletContext,
+  useNavigate,
+} from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCompactDisc, faMusic } from "@fortawesome/free-solid-svg-icons";
@@ -32,7 +31,9 @@ const Artist = () => {
   const [curPlaying, setCurplaying] = useState(null);
   const { user } = useAuth();
   const [subHeading, setSubHeading] = useOutletContext();
+
   const { artistId } = useParams();
+  let navigate = useNavigate();
   const url = settings.baseApiUrl + "/artists/" + artistId;
   const {
     error,
@@ -41,6 +42,11 @@ const Artist = () => {
     data: artist,
   } = useXmlHttp(url, "GET", { Authorization: `Bearer ${user.jwt}` });
 
+  function handleClick() {
+    navigate(`/artists`);
+  }
+
+  console.log(artist);
   return (
     <Segment basic>
       {error && <div>{error}</div>}
@@ -63,41 +69,49 @@ const Artist = () => {
       )}
 
       {artist && (
-        <Grid centered padded stackable doubling reversed>
+        <Grid centered padded stackable doubling>
           {setSubHeading(artist.name)}
           <Grid.Row centered>
             <Grid.Column width={8}>
-              <Segment basic className="artist-image-container ">
+              <Segment basic className="artist-image-container desktop">
                 <Image
-                  className="cover-photo"
+                  className="cover-photo desktop"
                   src={artist.image}
                   alt={artist.name}
                 />
               </Segment>
-              <Segment basic>
+              <Segment basic className="artist-image-container-device device">
+                <Image
+                  className="artist-image-device device"
+                  centered
+                  size="small"
+                  src={artist.image}
+                  alt={artist.name}
+                />
+              </Segment>
+              <Segment basic className="desktop">
                 <Header inverted as="h3" style={{ paddingBottom: "10px" }}>
                   About
                 </Header>
                 <p style={{ color: "white", lineHeight: 1.8 }}>
                   {artist.description}
                 </p>
-
-                <span>
-                  Formed: <b>{artist.year_formed}</b>
-                </span>
               </Segment>
-              <Grid.Row style={{ overflow: "hidden", paddingTop: "30px" }}>
-                {curPlaying && (
-                  <audio src={curPlaying} autoPlay={true} controls />
-                )}
-              </Grid.Row>
             </Grid.Column>
             <Grid.Column width={7}>
-              <Segment basic style={{ padding: "22px 8px", marginTop: "10px" }}>
+              <Segment
+                basic
+                className="top-tracks-container"
+                style={{ padding: "22px 8px", marginTop: "8px" }}
+              >
                 <Header
                   className="device"
                   inverted
-                  style={{ fontSize: "32px" }}
+                  style={{
+                    fontSize: "34px",
+                    marginTop: "-5px",
+                    textAlign: "center",
+                  }}
                 >
                   {subHeading}
                 </Header>
@@ -122,9 +136,10 @@ const Artist = () => {
                       unordered
                       style={{
                         color: "white",
-                        padding: "0px",
+                        padding: "2px",
                         borderBottom: ".3px solid #e2e1e3d6",
                       }}
+                      className="tracks-list"
                     >
                       <List.Item
                         className="track-row"
@@ -147,23 +162,54 @@ const Artist = () => {
                     </List>
                   ))}
               </Segment>
-              <Segment padded basic>
-                <Header as="h3" inverted>
-                  Albums
-                </Header>
-                <Card.Group itemsPerRow={3}>
+              <Grid.Row style={{ overflow: "hidden", paddingTop: "30px" }}>
+                {curPlaying && (
+                  <audio src={curPlaying} autoPlay={true} controls />
+                )}
+              </Grid.Row>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid doubling centered style={{ margin: "0px" }}>
+            <Grid.Column width={15}>
+              <Header as="h3" inverted>
+                Albums
+              </Header>
+              <Segment basic style={{ padding: "0px" }}>
+                <Card.Group
+                  stackable
+                  doubling
+                  itemsPerRow={6}
+                  className="album-group"
+                >
                   {artist.albums.map((a) => (
-                    <Card>
+                    <Card className="album-card">
                       <Image fluid src={a.image} />
-                      <Card.Header>{a.title}</Card.Header>
+                      <Card.Content style={{ padding: "0px" }}>
+                        <Card.Header className="album-header">
+                          {a.title}
+                        </Card.Header>
+                        <Card.Meta extra className="album-meta">
+                          {a.year_released}
+                        </Card.Meta>
+                      </Card.Content>
                     </Card>
                   ))}
                 </Card.Group>
               </Segment>
             </Grid.Column>
-          </Grid.Row>
+          </Grid>
         </Grid>
       )}
+      <Divider />
+
+      <Header
+        textAlign="left"
+        as="h3"
+        inverted
+        style={{ padding: "20px 30px 0px" }}
+      >
+        Artists / Trending Artists
+      </Header>
     </Segment>
   );
 };

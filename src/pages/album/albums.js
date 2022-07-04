@@ -51,7 +51,7 @@ const Albums = () => {
   //user auth
   const { user } = useAuth();
   const disabled = user.role !== 1;
-
+ 
   useEffect(() => {
     getAll();
   }, [reload]);

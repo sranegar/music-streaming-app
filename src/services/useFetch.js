@@ -46,9 +46,9 @@ const UseFetch = () => {
     }
 
     // Get all
-    const getAll = (number = null) => {
+    const getAll = (id = null) => {
         setIsLoading(true);
-        const url = !number ? baseURI : baseURI + "/" + number;
+        const url = (!id) ? baseURI : baseURI + "/" + id;
         const promise = fetch(url, {
             method: 'GET',
             headers: {
