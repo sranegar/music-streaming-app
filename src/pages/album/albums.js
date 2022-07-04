@@ -62,6 +62,8 @@ const Albums = () => {
     setSubHeading("Create Album");
   };
 
+ 
+
   const handleDelete = (e) => {
     if (disabled) return;
     let album = {};

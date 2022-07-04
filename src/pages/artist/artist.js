@@ -27,8 +27,8 @@ import { faCompactDisc, faMusic } from "@fortawesome/free-solid-svg-icons";
 
 import { useAuth } from "../../services/useAuth";
 
-const Artist = ({setCurplaying}) => {
- 
+const Artist = ({ setCurplaying }) => {
+  const [activeSong, setActiveSong] = useState(false);
   const { user } = useAuth();
   const [subHeading, setSubHeading] = useOutletContext();
   const { artistId } = useParams();
@@ -45,7 +45,7 @@ const Artist = ({setCurplaying}) => {
     navigate(`/artists`);
   }
 
-  console.log(props);
+ 
   return (
     <Segment basic>
       {error && <div>{error}</div>}
@@ -69,8 +69,7 @@ const Artist = ({setCurplaying}) => {
 
       {artist && (
         <Grid centered stackable doubling>
-          {setSubHeading(artist.name)}
-          <Grid.Row style={{ padding: "0px 40px" }}>
+          <Grid.Row style={{ padding: "0px 20px 20px" }}>
             <Grid.Column width={8}>
               <Segment className="artist-image-container desktop">
                 <Image
@@ -78,6 +77,12 @@ const Artist = ({setCurplaying}) => {
                   className="cover-photo desktop"
                   src={artist.image}
                   alt={artist.name}
+                  style={{ position: "relative" }}
+                />{" "}
+                <Icon
+                  name="chevron circle left"
+                  onClick={handleClick}
+                  className="prev-button"
                 />
               </Segment>
               <Segment basic className="artist-image-container-device device">
@@ -89,16 +94,7 @@ const Artist = ({setCurplaying}) => {
                   alt={artist.name}
                 />
               </Segment>
-              <Grid.Row
-           
-                style={{
-                  overflow: "hidden",
-                  padding: "0px 12px 30px" 
-             
-                }}
-              >
-               
-              </Grid.Row>
+
               {/* <Segment basic className="desktop">
                 <Header
                   inverted
@@ -119,7 +115,7 @@ const Artist = ({setCurplaying}) => {
               <Segment
                 basic
                 className="top-tracks-container"
-                style={{ padding: "22px 8px", marginTop: "8px" }}
+                style={{ padding: "0px", margin: "0px" }}
               >
                 <Header
                   className="device"
@@ -130,14 +126,14 @@ const Artist = ({setCurplaying}) => {
                     textAlign: "center",
                   }}
                 >
-                  {subHeading}
+                  {artist.name}
                 </Header>
                 <Header
                   className="desktop"
                   inverted
-                  style={{ fontSize: "44px", marginTop: "-10px" }}
+                  style={{ fontSize: "42px", margin: "0px", marginTop: "3px" }}
                 >
-                  {subHeading}
+                  {artist.name}
                 </Header>
                 <Header as="h3" inverted>
                   Top Tracks
@@ -161,7 +157,7 @@ const Artist = ({setCurplaying}) => {
                       <List.Item
                         className="track-row"
                         onClick={() => {
-                         setCurplaying(t.mp3file);
+                          setCurplaying(t.mp3file);
                         }}
                         style={{ padding: "6px" }}
                       >
@@ -190,17 +186,22 @@ const Artist = ({setCurplaying}) => {
               className="device"
               style={{ minWidth: "100%", padding: "20px 20px 0px" }}
             >
-              Albums
+              Albums ({artist.albums.length})
             </Header>
             <Grid.Column width={16} className="artist-albums-container">
-              <Header as="h3" inverted className="desktop">
-                Albums
+              <Header
+                as="h3"
+                inverted
+                className="desktop"
+                style={{ padding: "0px 14px" }}
+              >
+                Albums ({artist.albums.length})
               </Header>
               <Segment basic style={{ padding: "0px" }}>
                 <Card.Group
                   stackable
                   doubling
-                  itemsPerRow={6}
+                  itemsPerRow={10}
                   className="album-group"
                 >
                   {artist.albums.map((a) => (
@@ -223,15 +224,6 @@ const Artist = ({setCurplaying}) => {
         </Grid>
       )}
       <Divider />
-
-      <Header
-        textAlign="left"
-        as="h3"
-        inverted
-        style={{ padding: "20px 30px 0px" }}
-      >
-        Artists / Trending Artists
-      </Header>
     </Segment>
   );
 };

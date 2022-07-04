@@ -9,15 +9,16 @@ import {Outlet} from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import { useState } from "react";
+import MusicPlayer from "./MusicPlayer";
  
 
 const Body = ({curPlaying, setCurplaying}) => {
 
-  console.log(curPlaying)
     return (
       <>
-        <Header curPlaying={curPlaying} />
+        <Header />
         <Outlet curPlaying={curPlaying} setCurplaying={setCurplaying} />
+        <MusicPlayer curPlaying={curPlaying} />
         <Footer />
       </>
     );

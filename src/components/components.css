@@ -1,11 +1,11 @@
 .nav-bar {
-    background: linear-gradient(180deg, #0c0d2a, #0a0618 );
+    background: linear-gradient(200deg, #25536f, #183b77,  #313174, rgb(46, 27, 88), #1e1541, #1d2c5d,  #283a73 );
 }
 
  
 
 .nav-links {
-    color: #9e9e9e !important;
+    color: #d7d7d7 !important;
     font-size: 16px;
     letter-spacing: .4px;
     font-variant-caps: all-petite-caps;
@@ -13,9 +13,11 @@
 }
 
 span {
-    color: #9e9e9e !important;
+    color: #d7d7d7 !important;
 
 }
+
+ 
 
 .nav-links:hover {
     color: #bdbdbd !important;

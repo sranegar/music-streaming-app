@@ -23,9 +23,8 @@ import {
 import "./artist.css";
 import { useState, useEffect } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import useXmlHttp from "../../services/useXmlHttp";
 import { useAuth } from "../../services/useAuth";
-import useAxios from "../../services/useAxios";
+import UseFetch from "../../services/useFetch";
 
 const Artist = () => {
   const { user } = useAuth();
@@ -33,26 +32,21 @@ const Artist = () => {
   const [subHeading, setSubHeading] = useState("Trending Artists");
   const [artistView, setArtistView] = useState(false);
   const [url, setUrl] = useState(settings.baseApiUrl + "/artists");
-  const {
-    error,
-    isLoading,
-    data: artists,
-    getAll,
-    search,
-  } = useAxios(url, "GET", { Authorization: "Bearer " + user.jwt });
+  const { error, isLoading, data: artists, getAll, search } = UseFetch();
 
   console.log(artists);
 
   useEffect(() => {
     setSubHeading("Trending Artists");
+    getAll();
   }, [pathname]);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    const term = document.getElementById("album-search-term").value;
-    if (term == "") setSubHeading("All Albums");
+    const term = document.getElementById("artist-search-term").value;
+    if (term == "") setSubHeading("Trending Artists");
     else if (isNaN(term))
-      setSubHeading("Albums containing term '" + term + "'");
+      setSubHeading("artists containing term '" + term + "'");
     search(term);
   };
 
@@ -60,10 +54,11 @@ const Artist = () => {
     e.preventDefault();
     document.getElementById("artist-search-term").value = "";
     search("");
+    setSubHeading("Trending Artists");
   };
 
   return (
-    <Grid columns={1} centered style={{ padding: "0px 5px" }}>
+    <Grid columns={1} centered style={{ padding: "0px 0px" }}>
       {error && <div>{error}</div>}
       <Grid.Row>
         <Outlet context={[subHeading, setSubHeading]} />
@@ -80,9 +75,16 @@ const Artist = () => {
         </Dimmer>
       )}
 
-      {artists && (
-        <Grid centered style={{ minHeight: "100vh", padding: '10px 14px 40px'}}>
-          <Grid.Column width={15} className="searchbar-mobile device">
+      <Grid
+        centered
+        columns={2}
+        style={{
+          minHeight: "100vh",
+          padding: "10px 14px 40px",
+          minWidth: "100%",
+        }}
+      >
+        {/* <Grid.Column width={15} className="searchbar-mobile device">
             <Form
               className="device"
               inverted
@@ -97,105 +99,103 @@ const Artist = () => {
                 placeholder="Search artists..."
               />
             </Form>
-          </Grid.Column>
+          </Grid.Column> */}
 
-          <Grid.Column width={14} className="desktop">
-            <Form inverted size="small" onSubmit={handleSearch}>
-              <Form.Group>
-                <Form.Input
-                  width={14}
-                  size="small"
-                  className="desktop"
-                  id="artist-search-term"
-                  placeholder="Search artists..."
-                />
-                <Button
-                  className="desktop"
-                  inverted
-                  size="small"
-                  color="grey"
-                  type="submit"
-                  icon="search"
-                />
-                <Button
-                  size="small"
-                  className="desktop"
-                  basic
-                  inverted
-                  color="grey"
-                  style={{ marginLeft: "2px" }}
-                  onClick={clearSearchBox}
-                  icon="refresh"
-                />
-              </Form.Group>
-            </Form>
-          </Grid.Column>
-          {artistView ? (
-            ""
-          ) : (
-            <Grid
-              className="desktop"
-              style={{
-                padding: "20px 0px",
-                minWidth: "98%",
-              }}
-            >
-              <Header
-                textAlign="left"
-                as="h3"
+        <Grid.Column
+          style={{ minWidth: "100%", height: "60px", padding: "0px  80px" }}
+        >
+          <Form inverted onSubmit={handleSearch} style={{ width: "100%" }}>
+            <Form.Group>
+              <Form.Input
+                width={16}
+                id="artist-search-term"
+                placeholder="Search music by artists..."
+              
+              />
+              <Button
+                circular
                 inverted
-                style={{ padding: "20px 50px 10px" }}
-              >
-                Artists <span>/ {subHeading}</span>
-              </Header>
-            </Grid>
-          )}
-          <Grid.Row></Grid.Row>
-          <Card.Group
-            doubling
-            stackable
-            itemsPerRow={3}
-            className="image-group"
-            size="medium"
-            style={{
-              padding: "0px 60px 60px",
-            }}
-          >
-            {artists.data &&
-              artists.data.map((artist, i) => (
-                <Card raised className="artist-card artist-page-grid">
-                  <NavLink
-                    key={i}
-                    to={`/artists/${artist.id}`}
-                    onClick={() => setArtistView(true)}
-                  >
-                    <Image
-                      centered
-                      fluid
-                      size="massive"
-                      className="artist-image desktop"
-                      src={artist.image}
-                      alt={artist.name}
-                      style={{ minHeight: "300px" }}
-                    />
+                className="desktop"
+               
+                color="grey"
+                type="submit"
+                icon="search"
+              />
+              <Button
+                circular
+                className="desktop"
+                basic
+                inverted
+                color="grey"
+                style={{ marginLeft: "2px" }}
+                onClick={clearSearchBox}
+                icon="refresh"
+              />
+            </Form.Group>
+          </Form>
+        </Grid.Column>
 
-                    <Image
-                      centered
-                      fluid
-                      className="artist-image-mobile device"
-                      src={artist.image}
-                      alt={artist.name}
-                      style={{ minHeight: "170px" }}
-                    />
-                    <Card.Header textAlign="center" className="artist-name">
-                      {artist.name}
-                    </Card.Header>
-                  </NavLink>
-                </Card>
-              ))}
-          </Card.Group>
+        <Grid
+          className="desktop"
+          style={{
+            padding: "20px 0px",
+            minWidth: "100%",
+          }}
+        >
+          <Header
+            textAlign="left"
+            as="h3"
+            inverted
+            style={{ padding: "25px 90px 5px" }}
+          >
+            Artists <span style={{fontWeight: 'lighter', fontStyle: 'italic', fontSize: '19px', letterSpacing: '1.1px'}}> / {subHeading}</span>
+          </Header>
         </Grid>
-      )}
+
+        <Card.Group
+          doubling
+          stackable
+          itemsPerRow={5}
+          className="image-group"
+          style={{
+            padding: "30px 70px 60px",
+            minWidth: "100%",
+          }}
+        >
+          {artists &&
+            artists.map((artist, i) => (
+              <Card raised className="artist-card artist-page-grid">
+                <NavLink
+                  key={i}
+                  to={`/artists/${artist.id}`}
+                  onClick={() => setArtistView(true)}
+                >
+                  <Image
+                    centered
+                    fluid
+                    size="huge"
+                    className="artist-image desktop"
+                    src={artist.image}
+                    alt={artist.name}
+                    style={{ minHeight: "170px" }}
+                  />
+
+                  <Image
+                    centered
+                    fluid
+                    className="artist-image-mobile device"
+                    src={artist.image}
+                    alt={artist.name}
+                    style={{ minHeight: "170px" }}
+                  />
+                  <Card.Header textAlign="center" className="artist-name">
+                    {artist.name}
+                  </Card.Header>
+                </NavLink>
+              </Card>
+            ))}
+        </Card.Group>
+      </Grid>
     </Grid>
   );
 };

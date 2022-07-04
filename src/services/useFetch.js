@@ -14,7 +14,7 @@ const UseFetch = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const {user} = useAuth();
-    const baseURI = settings.baseApiUrl + '/albums';
+    const baseURI = settings.baseApiUrl + '/artists';
 
     //Abort controller to abort a request if it failed
     const abortCont = new AbortController();
@@ -45,6 +45,7 @@ const UseFetch = () => {
             });
     }
 
+   
     // Get all
     const getAll = (id = null) => {
         setIsLoading(true);
@@ -85,7 +86,7 @@ const UseFetch = () => {
     // Update an existing. id must be included in the body.
     const update = (body) => {
         setIsLoading(true);
-        const promise = fetch(baseURI + "/" + body.number, {
+        const promise = fetch(baseURI + "/" + body.id, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -98,8 +99,8 @@ const UseFetch = () => {
     }
 
     // Delete
-    const remove = (number) => {
-        const promise = fetch(baseURI + "/" + number, {
+    const remove = (id) => {
+        const promise = fetch(baseURI + "/" + id, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',

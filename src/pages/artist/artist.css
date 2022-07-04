@@ -1,12 +1,9 @@
-.cur-artist-container {
-  background-color: #070707 !important;
-}
-
+ 
 .artist-image-container {
-  background-color: #040404 !important;
+  background-color: transparent !important;
   box-shadow: none !important;
   padding: 10px !important;
-  min-width: 400px !important;
+  min-width: 370px !important;
 }
 
 .artist-image-container-device {
@@ -17,7 +14,23 @@
 .artist-image {
   transition: all 0.2s;
   opacity: 88%;
-  padding: 2px 2px !important;
+ 
+}
+
+.prev-button {
+  position: absolute;
+  top: 30px;
+  left: 16px;
+  font-size: 44px !important;
+  color:rgba(242, 242, 242, 0.698);
+  cursor: pointer;
+    transition: all 0.2s;
+
+}
+
+.prev-button:hover {
+    transition: all 0.2s;
+    color:rgba(242, 242, 242, 0.813);
 }
 
 .artist-image-mobile {
@@ -35,8 +48,8 @@
   border-radius: 4.5px !important;
   transition: all 0.2s;
   padding:  0px !important;
-  margin: 0px 14px 30px !important;
-  min-width: 30% !important;
+  margin: 0px 10px 40px !important;
+  min-width: 14% !important;
   overflow: hidden !important;
 }
 
@@ -51,8 +64,8 @@
 
 .artist-name {
   color: #e2e1e3d6 !important;
-  padding: 14px !important;
-  font-size: 20px;
+  padding: 8px !important;
+  font-size: 16px;
   font-weight: lighter;
   font-variant-caps: all-petite-caps;
 }
@@ -76,42 +89,52 @@
 }
 
 .artist-albums-container {
-  padding: 0px 70px !important;
-  margin-top: -10px !important;
+  padding: 0px 40px !important;
+  margin-top: 0px !important;
 }
 
 .album-card {
   background-color: #232323;
-  box-shadow: none;
   box-shadow: none !important;
   overflow: hidden !important;
   min-height: 200px !important;
-  margin: 15px 18px !important;
-  width: 14% !important;
+  margin: 18px 16px !important;
+  min-width: 12% !important;
 }
 
-.prev-icon {
+/* .prev-icon {
   color: #e2e1e349 !important;
   cursor: pointer;
   padding-left: 30px;
   transition: 0.2s;
-}
+} */
 
-.prev-icon:hover {
+/* .prev-icon:hover {
   transition: 0.2s;
   color: #e2e1e3d6 !important;
+} */
+
+.ui.inverted.form input:not([type]), .ui.inverted.form input[type=date], .ui.inverted.form input[type=datetime-local], .ui.inverted.form input[type=email], .ui.inverted.form input[type=file], .ui.inverted.form input[type=number], .ui.inverted.form input[type=password], .ui.inverted.form input[type=search], .ui.inverted.form input[type=tel], .ui.inverted.form input[type=text], .ui.inverted.form input[type=time], .ui.inverted.form input[type=url] {
+    background: #000;
+    border-color: rgba(103, 102, 102, 0.208);
+    color: #e2e1e3d6;
+ 
+ 
 }
+
+
+
 .album-header {
   color: #e2e1e3d6 !important;
-  padding: 8px 8px 0px;
+  padding: 10px 8px 0px;
   font-size: 14px !important;
   font-weight: bolder;
-  min-height: 58px;
+  min-height: 70px;
 }
 
 .album-meta {
   color: #e2e1e38d !important;
-  padding: 0px 8px 8px;
+  padding: 0px 10px 8px;
   margin: 0px !important;
   font-size: 14px !important;
   font-weight: lighter;
@@ -129,7 +152,7 @@
 }
 
 .cover-photo {
-  min-height: 380px;
+  min-height: 405px;
 
   transition: all 0.2s;
   opacity: 88%;
@@ -154,7 +177,8 @@
 
  
 .top-tracks-container {
-  padding-left: 16px !important;
+  padding-right: 40px !important;
+  
 }
 
 @media screen and (max-width: 766px) {
@@ -162,7 +186,10 @@
     min-height: 220px !important;
   }
 
- 
+ .artist-name {
+  font-size: 20px !important;
+  padding: 14px !important;
+ }
   .artist-name-device {
     font-size: 20px !important;
   }
@@ -182,7 +209,7 @@
   }
 
   .album-header {
-    padding: 6px 10px 3px !important;
+    padding: 10px 10px 3px !important;
     font-size: 16px !important;
     min-height: 46px !important;
   }
@@ -193,7 +220,7 @@
   }
 
   .album-group {
-    padding: 0px 10px 10px !important;
+    padding: 10px 10px 10px !important;
   }
 
   .artist-albums-container {
