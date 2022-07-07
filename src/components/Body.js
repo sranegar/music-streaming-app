@@ -12,13 +12,13 @@ import { useState } from "react";
 import MusicPlayer from "./MusicPlayer";
  
 
-const Body = ({curPlaying, setCurplaying}) => {
+const Body = ({curPlaying, setCurplaying, activeSong, setActiveSong}) => {
 
     return (
       <>
         <Header />
-        <Outlet curPlaying={curPlaying} setCurplaying={setCurplaying} />
-        <MusicPlayer curPlaying={curPlaying} />
+        <Outlet curPlaying={curPlaying} setCurplaying={setCurplaying} activeSong={activeSong} setActiveSong={setActiveSong} />
+        <MusicPlayer curPlaying={curPlaying} activeSong={activeSong} />
         <Footer />
       </>
     );

@@ -9,7 +9,7 @@ const Home = () => {
             <Grid.Row>
                 <Grid.Column className='home-wrapper' textAlign='center'>
                     <h1 className='home-h1'>Stream Music</h1>
-                    <p className='home-subheader'>Discover and stream all your favorite music for <span className='free-text'>free</span> at anytime.</p>
+                    <p className='home-subheader'>Discover and stream music for <span className='free-text'>free</span> at anytime.</p>
                     <NavLink to='/artists'>
                         <button className="glow-on-hover" type="button">Dive in</button>
                     </NavLink>

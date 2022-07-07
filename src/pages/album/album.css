@@ -13,15 +13,18 @@
 .album-page-grid {
     box-shadow: none !important;
 }
+ 
 
 
 .albums-container {
     background-color: #040404 !important;
     border: 1px solid #1b1b1b !important;
-    width: 100% !important;
+    width: 96% !important;
 }
 
- 
+.track-list-item {
+    cursor: pointer !important;
+}
 
 .track-list-item:hover {
     color: #c724ac !important;
@@ -164,4 +167,18 @@ textarea {
 ul {
     color: #000;
     list-style: none;
+}
+
+@media screen and (max-width: 766px) {
+  .album-track-list {
+    min-width: 90% !important; 
+  }
+
+  .album-view-row {
+    padding: 0px 3px !important;
+  }
+
+  .track-list-container {
+    padding-left: 10px !important;
+  }
 }

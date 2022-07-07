@@ -29,24 +29,24 @@ import UseFetch from "../../services/useFetch";
 const Artist = () => {
   const { user } = useAuth();
   const { pathname } = useLocation();
-  const [subHeading, setSubHeading] = useState("Trending Artists");
+  const [subHeading, setSubHeading] = useState("All Artists");
   const [artistView, setArtistView] = useState(false);
-  const [url, setUrl] = useState(settings.baseApiUrl + "/artists");
+ 
   const { error, isLoading, data: artists, getAll, search } = UseFetch();
 
-  console.log(artists);
+ 
 
   useEffect(() => {
-    setSubHeading("Trending Artists");
+    setSubHeading("All Artists");
     getAll();
   }, [pathname]);
 
   const handleSearch = (e) => {
     e.preventDefault();
     const term = document.getElementById("artist-search-term").value;
-    if (term == "") setSubHeading("Trending Artists");
+    if (term == "") setSubHeading("All Artists");
     else if (isNaN(term))
-      setSubHeading("artists containing term '" + term + "'");
+      setSubHeading("results for '" + term + "'");
     search(term);
   };
 
@@ -56,7 +56,7 @@ const Artist = () => {
     search("");
     setSubHeading("Trending Artists");
   };
-
+  
   return (
     <Grid columns={1} centered style={{ padding: "0px 0px" }}>
       {error && <div>{error}</div>}
@@ -74,7 +74,7 @@ const Artist = () => {
           />
         </Dimmer>
       )}
-
+ 
       <Grid
         centered
         columns={2}
@@ -102,7 +102,8 @@ const Artist = () => {
           </Grid.Column> */}
 
         <Grid.Column
-          style={{ minWidth: "100%", height: "60px", padding: "0px  80px" }}
+          className="search-bar-container"
+          style={{ minWidth: "100%", height: "60px", padding: "0px 70px" }}
         >
           <Form inverted onSubmit={handleSearch} style={{ width: "100%" }}>
             <Form.Group>
@@ -110,15 +111,16 @@ const Artist = () => {
                 width={16}
                 id="artist-search-term"
                 placeholder="Search music by artists..."
-              
+                icon="search"
+                iconPosition="left"
               />
               <Button
                 circular
                 inverted
                 className="desktop"
-               
                 color="grey"
                 type="submit"
+                style={{ marginLeft: "4px" }}
                 icon="search"
               />
               <Button
@@ -127,7 +129,7 @@ const Artist = () => {
                 basic
                 inverted
                 color="grey"
-                style={{ marginLeft: "2px" }}
+                style={{ marginLeft: "4px" }}
                 onClick={clearSearchBox}
                 icon="refresh"
               />
@@ -148,7 +150,18 @@ const Artist = () => {
             inverted
             style={{ padding: "25px 90px 5px" }}
           >
-            Artists <span style={{fontWeight: 'lighter', fontStyle: 'italic', fontSize: '19px', letterSpacing: '1.1px'}}> / {subHeading}</span>
+            Artists{" "}
+            <span
+              style={{
+                fontWeight: "lighter",
+                fontStyle: "italic",
+                fontSize: "19px",
+                letterSpacing: "1.1px",
+              }}
+            >
+              {" "}
+              / {subHeading}
+            </span>
           </Header>
         </Grid>
 
@@ -164,15 +177,15 @@ const Artist = () => {
         >
           {artists &&
             artists.map((artist, i) => (
-              <Card raised className="artist-card artist-page-grid">
+              <Card key={i} raised className="artist-card artist-page-grid">
                 <NavLink
-                  key={i}
+            
                   to={`/artists/${artist.id}`}
                   onClick={() => setArtistView(true)}
                 >
                   <Image
                     centered
-                    fluid
+                    
                     size="huge"
                     className="artist-image desktop"
                     src={artist.image}

@@ -20,15 +20,14 @@ import {
   Link,
   useOutletContext,
   useNavigate,
+  NavLink,
+  Outlet,
 } from "react-router-dom";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCompactDisc, faMusic } from "@fortawesome/free-solid-svg-icons";
 
 import { useAuth } from "../../services/useAuth";
 
-const Artist = ({ setCurplaying }) => {
-  const [activeSong, setActiveSong] = useState(false);
+const Artist = ({ setCurplaying, activeSong, setActiveSong}) => {
+ 
   const { user } = useAuth();
   const [subHeading, setSubHeading] = useOutletContext();
   const { artistId } = useParams();
@@ -37,26 +36,20 @@ const Artist = ({ setCurplaying }) => {
   const {
     error,
     isLoading,
-    setData,
     data: artist,
   } = useXmlHttp(url, "GET", { Authorization: `Bearer ${user.jwt}` });
 
   function handleClick() {
     navigate(`/artists`);
   }
-
+  
  
   return (
     <Segment basic>
       {error && <div>{error}</div>}
 
       {isLoading && (
-        <Dimmer
-          page
-          active
-          verticalAlign="middle"
-          style={{ paddingTop: "150px" }}
-        >
+        <Dimmer page active>
           <Loader
             inline="centered"
             size="huge"
@@ -67,7 +60,8 @@ const Artist = ({ setCurplaying }) => {
         </Dimmer>
       )}
 
-      {artist && (
+      {artist && (   
+    
         <Grid centered stackable doubling>
           <Grid.Row style={{ padding: "0px 20px 20px" }}>
             <Grid.Column width={8}>
@@ -94,22 +88,6 @@ const Artist = ({ setCurplaying }) => {
                   alt={artist.name}
                 />
               </Segment>
-
-              {/* <Segment basic className="desktop">
-                <Header
-                  inverted
-                  style={{
-                    color: "#e2e1e3d6 ",
-                    fontVariantCaps: "all-petite-caps",
-                    fontSize: "18px",
-                  }}
-                >
-                  About
-                </Header>
-                <p style={{ color: "white", lineHeight: 1.8 }}>
-                  {artist.description}
-                </p>
-              </Segment> */}
             </Grid.Column>
             <Grid.Column width={8}>
               <Segment
@@ -146,7 +124,6 @@ const Artist = ({ setCurplaying }) => {
                       size="small"
                       inverted
                       celled
-                      unordered
                       style={{
                         color: "white",
                         padding: "6px",
@@ -156,16 +133,26 @@ const Artist = ({ setCurplaying }) => {
                     >
                       <List.Item
                         className="track-row"
-                        onClick={() => {
+                        onClick={() => { 
                           setCurplaying(t.mp3file);
+                          setActiveSong(t.track_id);
                         }}
                         style={{ padding: "6px" }}
                       >
-                        <List.Icon
-                          verticalAlign="middle"
-                          size="large"
-                          name="play circle"
-                        />
+                        {activeSong === t.track_id ? (
+                          <List.Icon
+                            name="play circle"
+                            size="large"
+                            verticalAlign="middle"
+                            color="green"
+                          />
+                        ) : (
+                          <List.Icon
+                            verticalAlign="middle"
+                            size="large"
+                            name="play circle"
+                          />
+                        )}
                         <List.Content verticalAlign="middle">
                           {t.title}
                         </List.Content>
@@ -174,6 +161,9 @@ const Artist = ({ setCurplaying }) => {
                   ))}
               </Segment>
             </Grid.Column>
+          </Grid.Row>
+          <Grid.Row style={{padding: '0px 0px 16px 0px', margin: '0px'}}>
+            <Outlet context={[subHeading, setSubHeading]} />
           </Grid.Row>
           <Grid
             doubling
@@ -204,19 +194,24 @@ const Artist = ({ setCurplaying }) => {
                   itemsPerRow={10}
                   className="album-group"
                 >
-                  {artist.albums.map((a) => (
-                    <Card className="album-card">
-                      <Image fluid src={a.image} />
-                      <Card.Content style={{ padding: "0px" }}>
-                        <Card.Header className="album-header">
-                          {a.title}
-                        </Card.Header>
-                        <Card.Meta extra className="album-meta">
-                          {a.year_released}
-                        </Card.Meta>
-                      </Card.Content>
-                    </Card>
-                  ))}
+                  {artist &&
+                    artist.albums.map((a, i) => (
+                      <Card key={i} className="album-card">
+                        <NavLink
+                          to={`/artists/${artist.id}/albums/${a.number}`}
+                        >
+                          <Image fluid src={a.image} />
+                          <Card.Content style={{ padding: "0px" }}>
+                            <Card.Header className="album-header">
+                              {a.title}
+                            </Card.Header>
+                            <Card.Meta className="album-meta">
+                              {a.year_released}
+                            </Card.Meta>
+                          </Card.Content>
+                        </NavLink>
+                      </Card>
+                    ))}
                 </Card.Group>
               </Segment>
             </Grid.Column>

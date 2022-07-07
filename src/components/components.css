@@ -1,15 +1,16 @@
 .nav-bar {
-    background: linear-gradient(200deg, #25536f, #183b77,  #313174, rgb(46, 27, 88), #1e1541, #1d2c5d,  #283a73 );
+    /* background: linear-gradient(200deg, #bfaa23, #ff4949,   #5836df ); */
+   background-color: #1e2337;
 }
-
  
 
 .nav-links {
     color: #d7d7d7 !important;
-    font-size: 16px;
     letter-spacing: .4px;
     font-variant-caps: all-petite-caps;
     transition: 0.2s ease-in, 0.2s ease-out;
+    margin-top: 40px !important; 
+   
 }
 
 span {
@@ -17,9 +18,9 @@ span {
 
 }
 
- 
 
-.nav-links:hover {
+
+.nav-links:hover > i.icon {
     color: #bdbdbd !important;
     transition: 0.2s ease-in, 0.2s ease-out;
 }

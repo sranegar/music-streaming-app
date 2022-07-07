@@ -51,7 +51,7 @@ const Albums = () => {
   //user auth
   const { user } = useAuth();
   const disabled = user.role !== 1;
- 
+
   useEffect(() => {
     getAll();
   }, [reload]);
@@ -61,8 +61,6 @@ const Albums = () => {
     setShowCreateModal(true);
     setSubHeading("Create Album");
   };
-
- 
 
   const handleDelete = (e) => {
     if (disabled) return;
@@ -358,6 +356,7 @@ const AlbumsByArtist = () => {
     data: albums,
   } = useXmlHttp(url, "GET", { Authorization: `Bearer ${user.jwt}` });
 
+  
   useEffect(() => {
     setSubHeading("All Albums");
   }, [pathname]);
@@ -370,109 +369,11 @@ const AlbumsByArtist = () => {
   }
 
   return (
-    <Segment className="albums-container">
-      <Grid stackable doubling padded columns={3}>
-        {error && <div>{error}</div>}
-
-        {isLoading && (
-          <Container style={{ backgroundColor: "#040404" }}>
-            <Dimmer page active>
-              <Loader
-                inline="centered"
-                size="big"
-                inverted
-                active
-                content="Loading"
-              />
-            </Dimmer>
-          </Container>
-        )}
-
-        {albums &&
-          (albums.length === 0 ? (
-            <Header as="h5" inverted>
-              Albums were not found.
-            </Header>
-          ) : (
-            <Grid.Row>
-              <Header inverted as="h4" style={{ paddingLeft: "12px" }}>
-                {subHeading}
-                {!albumById ? ` (${albums.length})` : null}
-              </Header>
-              <FontAwesomeIcon
-                icon={faXmark}
-                size="xl"
-                onClick={handleOnClick}
-                style={{
-                  cursor: "pointer",
-                  color: "#21ba45",
-                  position: "absolute",
-                  right: "12px",
-                }}
-              />
-            </Grid.Row>
-          ))}
-        <Grid centered>
-          <Outlet context={[subHeading, setSubHeading]} />
-        </Grid>
-
-        {albums &&
-          albums.map((alb, index) => (
-            <Grid.Column key={index}>
-              <NavLink
-                to={`/artists/${alb.pivot.artist}/albums/${alb.number}`}
-                onClick={() => setAlbumById(true)}
-              >
-                <Segment
-                  className="album-card"
-                  inverted
-                  style={{
-                    backgroundColor: "#232323",
-                    padding: "5px",
-                    minWidth: "120px",
-                  }}
-                >
-                  <Image
-                    fluid
-                    centered
-                    className="album-img"
-                    src={alb.image}
-                    alt={alb.title}
-                    style={{ minHeight: "80px" }}
-                  />
-                  <Header
-                    as="h5"
-                    color="black"
-                    style={{
-                      marginTop: "10px",
-                      minHeight: "36px",
-                      padding: "0px 3px",
-                    }}
-                    inverted
-                  >
-                    {alb.title}
-                  </Header>
-                  <Grid columns={2} style={{ padding: "0px 4px" }}>
-                    <Grid.Row>
-                      <Grid.Column
-                        width={4}
-                        verticalAlign="bottom"
-                                      textAlign="left"
-                                      
-                                  
-                      >
-                        <p style={{ color: "#5E5E5EFF"}}>
-                          {alb.pivot.release_year}
-                        </p>
-                      </Grid.Column>
-                    </Grid.Row>
-                  </Grid>
-                </Segment>
-              </NavLink>
-            </Grid.Column>
-          ))}
+    
+      <Grid centered>
+        <Outlet context={[subHeading, setSubHeading]} />
       </Grid>
-    </Segment>
+  
   );
 };
 

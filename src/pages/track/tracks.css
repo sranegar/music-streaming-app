@@ -1,162 +1,158 @@
 .track-card {
-  background-color: #0b0b0b !important;
-  border-radius: 2.5px !important;
-  transition: all 0.2s;
-  position: relative;
+    background-color: #0b0b0b !important;
+    border-radius: 2.5px !important;
+    transition: all 0.2s;
+    position: relative;
+
 }
 
 .track-card:hover {
-  transition: 0.2s;
-  background-color: #151515 !important;
-  cursor: pointer !important;
+    transition: 0.2s;
+    background-color: #151515 !important;
+    cursor: pointer !important;
 }
 
+
 .img-container {
-  height: 400px !important;
-  width: 400px !important;
+
+    height: 400px !important;
+    width: 400px !important;
 }
 
 .tracks-container {
-  background-color: #040404 !important;
-  border: 1px solid #1b1b1b !important;
-  width: 100% !important;
+    background-color: #040404 !important;
+    border: 1px solid #1b1b1b !important;
+    width: 100% !important;
 }
 
 .track-card:hover > .play-btn {
-  display: flex !important;
-  transition: all 1s !important;
+    display: flex !important;
+    transition: all 1s !important;
+
 }
 
 .track-list-item {
+
 }
 
 .track-list-item:hover {
-  color: #c724ac !important;
-  background-color: #0b0b0b !important;
+    color: #c724ac !important;
+    background-color: #0b0b0b !important;
 }
 
+
 .play-btn {
-  position: absolute !important;
-  left: 12px;
-  bottom: 12px;
-  transition: all 1s !important;
-  display: none !important;
+    position: absolute !important;
+    left: 12px;
+    bottom: 12px;
+    transition: all 1s !important;
+    display: none !important;
 }
 
 .play-btn:hover {
-  transition: all 0.5s !important;
+    transition: all 0.5s !important;
 }
 
 audio {
-  border-radius: 0px;
-  border: none !important;
-  width: 40% !important;
+    border-radius: 0px;
+    border: none !important;
+    width: 40% !important
 }
 
+ 
 audio::-webkit-media-controls-panel {
-  background-color: #070707;
-  border: none;
-  border-radius: 0px;
-  padding: 10px 20px;
+   background-color: rgb(202, 202, 202);
+    border: none;
+    border-radius: 0px;
+    padding: 10px 20px;
 }
 
 audio::-webkit-media-controls-play-button {
-  background-color: rgba(205, 205, 205, 0.79);
-  border-radius: 50%;
-  transition: 0.3s;
-}
-
-audio::-webkit-media-controls-play-button:hover {
-  transform: scale(1.1);
-  transition: 0.3s;
-  filter: drop-shadow(2px 3px 3px rgb(14, 14, 14));
-}
-
-audio::-webkit-media-controls-play-button:hover {
   background-color: rgb(202, 202, 202);
+    border-radius: 50%;  
+    transition: 0.3s;
+ 
+}
+
+audio::-webkit-media-controls-play-button:hover {transform: scale(1.1);  transition:  0.3s; filter: drop-shadow(2px 3px 3px rgb(14, 14, 14));}
+
+audio::-webkit-media-controls-play-button:hover {
+    background-color: rgb(202, 202, 202);
 }
 
 audio::-webkit-media-controls-current-time-display {
-  color: rgba(255, 255, 255);
-  font-size: 12px;
-  padding-left: 10px;
+    color: rgba(255, 255, 255);
+    font-size: 12px;
+    padding-left: 10px;
 }
 
 audio::-webkit-media-controls-time-remaining-display {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 12px;
-  padding-right: 10px;
+    color: rgba(255, 255, 255, 0.500);
+         font-size: 12px;
+            padding-right: 10px;
 }
 
 audio::-webkit-media-controls-seek-back-button {
-  color: rgba(255, 255, 255, 0.5);
+        color: rgba(255, 255, 255, 0.500);
 }
-audio::-webkit-media-controls-panel {
-  background: linear-gradient(
-    45deg,
-    #255776,
-    #183b77,
-    #1d2c5d,
-    #261c52,
-    #311340,
-    rgb(50, 27, 88),
-    #1e1541,
-    #1d2c5d,
-    #1d2c5d
-  );
+ audio::-webkit-media-controls-panel {
+    background-color: #010204fd;
 }
 
 audio::-webkit-media-controls-mute-button {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color:  rgba(255, 255, 255, 0.500);
   border-radius: 50%;
 }
+ 
 
 .tbl-header {
-  font-size: 15px;
-  font-variant-caps: small-caps;
-  font-weight: lighter !important;
+    font-size: 15px;
+    font-variant-caps: small-caps;
+    font-weight: lighter !important;
 }
 
 .tbl-cell {
-  color: #aeaeae;
-  font-size: 12px;
+    color: #aeaeae;
+    font-size: 12px;
 }
 
 .tbl-title {
-  color: #dddddd;
-  font-size: 14px;
-  font-weight: bolder;
+    color: #dddddd ;
+    font-size: 14px;
+    font-weight: bolder ;
 }
 
 .tbl-artist {
-  color: #aeaeae;
-  font-size: 13px;
-  font-weight: lighter;
+    color: #aeaeae;
+    font-size: 13px;
+    font-weight: lighter ;
 }
 
 .tbl-row {
-  max-height: 10px !important;
+    max-height: 10px !important;
 }
 
+
 select {
-  width: 80px;
-  font-size: 12px;
-  height: 28px;
-  border-radius: 4px;
-  color: #c8c8c8;
-  background-color: rgb(6, 6, 6);
-  cursor: pointer;
-  padding: 2px;
+    width: 80px;
+    font-size: 12px;
+    height: 28px;
+    border-radius: 4px;
+    color: #c8c8c8;
+    background-color: rgb(6, 6, 6);
+    cursor: pointer;
+    padding: 2px;
+
 }
 
 @media screen and (max-width: 766px) {
-  audio {
-    width: 80% !important;
-  }
+    audio {
+            width: 80% !important
+    }
 }
 
 @media screen and (max-width: 378px) {
-  audio {
-    width: 96% !important;
-  }
+    audio {
+            width: 96% !important
+    }
 }

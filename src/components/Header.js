@@ -5,7 +5,7 @@ File: Header.js
 Description: Create the page header
 */
 
-import { Grid, Button, Icon, Dropdown, Menu} from "semantic-ui-react";
+import { Grid, Button, Icon, Dropdown, Menu } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import "./components.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -42,7 +42,6 @@ const TopNav = ({ curPlaying }) => {
       padded
       stackable
       verticalAlign="middle"
-      style={{ backgroundColor: "#312a77" }}
     >
       <Grid.Column className="device">
         <Icon
@@ -121,32 +120,44 @@ const TopNav = ({ curPlaying }) => {
         </Grid.Row>
       )}
 
-      <Grid.Row className="desktop" style={{ padding: "14px 60px 14px 40px" }}>
-  
-        <Grid.Column width={2} style={{ padding: "0px" }}>
-          <NavLink className="nav-links" to="/">
+      <Grid.Row className="desktop" style={{ padding: "14px 60px 14px 30px" }}>
+        <Grid.Column
+          verticalAlign="middle"
+          width={2}
+          style={{ padding: "0px" }}
+        >
+          <NavLink className="nav-links" to="/" style={{ fontSize: "18px" }}>
             <Icon
               name="home"
               style={{
                 color: "#d7d7d7 ",
-
-                fontSize: "20px",
+                padding: "5px",
+                marginRight: "12px",
               }}
             />
             Home
           </NavLink>
         </Grid.Column>
 
-        <Grid.Column width={2} style={{ padding: "0px" }}>
-          <NavLink className="nav-links" to="/artists">
+        <Grid.Column
+          verticalAlign="middle"
+          width={3}
+          style={{ padding: "0px" }}
+        >
+          <NavLink
+            className="nav-links"
+            to="/artists"
+            style={{ fontSize: "18px" }}
+          >
             <Icon
               name="search"
               style={{
                 color: "#d7d7d7",
-                fontSize: "20px",
+                padding: "5px",
+                marginRight: "12px",
               }}
             />
-            Music
+            Artists
           </NavLink>
         </Grid.Column>
 
