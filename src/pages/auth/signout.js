@@ -20,33 +20,31 @@ const Signout = () => {
     })
 
     return (
-        <Grid padded centered style={{minHeight: '100vh'}}>
-            <Advertisement className='sign-out-ad' unit='panorama'>
-                <Grid doubling stackable padded centered columns={5}>
-                    <p style={{
-                        fontVariantCaps: 'all-petite-caps',
-                        fontSize: '20px',
-                        paddingTop: '80px',
-                        color: 'grey'
-                    }}>You successfully signed out.</p>
-                    <Grid.Row>
-                        <Header as='h3' style={{paddingBottom: '20px'}}>Sign up for free and enjoy hours of unlimited
-                            music streaming.</Header>
-                    </Grid.Row>
-                    <Grid.Column>
-                        <NavLink to="/signin">
-                            <Button fluid basic inverted color='green' circular size='small'>Login</Button>
-                        </NavLink>
-                    </Grid.Column>
-                    <Grid.Column>
-                        <NavLink to="/signup">
-                            <Button fluid circular size='small' color='green'>Sign Up</Button>
-                        </NavLink>
-                    </Grid.Column>
-                </Grid>
-            </Advertisement>
-
-        </Grid>
+      <Grid padded centered style={{ minHeight: "80vh" }}>
+        <Advertisement className="sign-out-ad" unit="panorama">
+          <Grid doubling stackable padded centered columns={5}>
+            <Grid.Row>
+              <Header as="h3" style={{ padding: "60px 0px 40px" }}>
+                Sign up for free and enjoy hours of unlimited music streaming.
+              </Header>
+            </Grid.Row>
+            <Grid.Column>
+              <NavLink to="/signin">
+                <Button fluid color="violet" size="small">
+                  Login
+                </Button>
+              </NavLink>
+            </Grid.Column>
+            <Grid.Column>
+              <NavLink to="/signup">
+                <Button fluid inverted size="small" color="grey">
+                  Sign Up
+                </Button>
+              </NavLink>
+            </Grid.Column>
+          </Grid>
+        </Advertisement>
+      </Grid>
     );
 };
 

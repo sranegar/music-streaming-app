@@ -12,7 +12,14 @@ import { settings } from "../config/config";
 // Create the context
 const AuthContext = createContext(null);
 
-const AuthProvider = ({ children }) => {
+const AuthProvider = ({
+  children,
+  pauseSong,
+  setCurplaying,
+  setCurartist,
+  setActiveSong,
+  setPause,
+}) => {
   const [isAuthed, setIsAuthed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -41,7 +48,8 @@ const AuthProvider = ({ children }) => {
         setIsLoading(false);
         setIsAuthed(true);
         setUser({
-          name: result.name,
+          first_name: result.first_name,
+          last_name: result.last_name,
           role: result.role,
           username: result.username,
           jwt: result.jwt,
@@ -66,6 +74,10 @@ const AuthProvider = ({ children }) => {
     setIsAuthed(false);
     setIsSignup(false);
     setUser(null);
+    setCurplaying(null);
+    setCurartist(null);
+    setActiveSong(null);
+    pauseSong();
   };
 
   //signup function
@@ -88,7 +100,12 @@ const AuthProvider = ({ children }) => {
       .then((result) => {
         setError(null);
         setIsLoading(false);
-        setUser({ name: result.data.name, role: result.data.role });
+        setUser({
+          first_name: result.data.first_name,
+          last_name: result.data.last_name,
+          role: result.data.role,
+          username: result.data.username,
+        });
         setIsSignup(true);
       })
       .catch((err) => {

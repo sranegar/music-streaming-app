@@ -1,29 +1,26 @@
-/*
-Name: Adebayo Onifade
-Date: 6/10/2022
-File: Header.js
-Description: Create the page header
-*/
-
-import { Grid, Button, Icon, Dropdown, Menu } from "semantic-ui-react";
+import { Grid, Button, Icon, Dropdown } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
-import "./components.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeadphonesSimple } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../services/useAuth";
 import { useState } from "react";
+import "./components.css";
 
-const TopNav = ({ curPlaying }) => {
+const TopNav = () => {
   const [showMenu, setShowMenu] = useState(false);
-
   const { isAuthed, user } = useAuth();
+
   const className = ({ isActive }) =>
     isActive ? "nav-link active" : "nav-link";
 
   const options = [
     {
       key: "user",
-      text: <span>You are signed in.</span>,
+      text: (
+        <p style={{ color: "white", fontFamily: "arial" }}>
+          {isAuthed
+            ? `You are signed in as ${user.first_name} ${user.last_name}`
+            : null}
+        </p>
+      ),
       disabled: true,
     },
     { key: "signout", text: <NavLink to="/signout">Sign out</NavLink> },
@@ -34,15 +31,7 @@ const TopNav = ({ curPlaying }) => {
   }
 
   return (
-    <Grid
-      className="nav-bar"
-      columns={8}
-      reversed
-      centered
-      padded
-      stackable
-      verticalAlign="middle"
-    >
+    <Grid className="nav-bar" columns={8} reversed centered stackable padded>
       <Grid.Column className="device">
         <Icon
           name="bars"
@@ -74,33 +63,16 @@ const TopNav = ({ curPlaying }) => {
             </NavLink>
           </Grid.Column>
 
-          <Grid.Column>
+          <Grid.Column textAlign="center">
             {isAuthed ? (
-              <Button
-                fluid
-                className="logout-btn"
-                compact
-                size="tiny"
-                basic
-                inverted
-                color="grey"
+              <NavLink
+                className="nav-links"
+                to="/signout"
+                onClick={() => setShowMenu(false)}
+                style={{ color: "#d7d7d7" }}
               >
-                {" "}
-                <Dropdown
-                  trigger={
-                    <span>
-                      <Icon
-                        size="large"
-                        name="user circle"
-                        color="white"
-                        style={{ marginRight: "8px" }}
-                      />
-                      {user.name}{" "}
-                    </span>
-                  }
-                  options={options}
-                />
-              </Button>
+                Signout
+              </NavLink>
             ) : (
               <NavLink to="/signin" className={className}>
                 {" "}
@@ -109,7 +81,7 @@ const TopNav = ({ curPlaying }) => {
                   fluid
                   basic
                   inverted
-                  color="teal"
+                  color="grey"
                   content="Login"
                   icon="user"
                   size="small"
@@ -126,15 +98,7 @@ const TopNav = ({ curPlaying }) => {
           width={2}
           style={{ padding: "0px" }}
         >
-          <NavLink className="nav-links" to="/" style={{ fontSize: "18px" }}>
-            <Icon
-              name="home"
-              style={{
-                color: "#d7d7d7 ",
-                padding: "5px",
-                marginRight: "12px",
-              }}
-            />
+          <NavLink className="nav-links" to="/" style={{ fontSize: "20px" }}>
             Home
           </NavLink>
         </Grid.Column>
@@ -147,45 +111,40 @@ const TopNav = ({ curPlaying }) => {
           <NavLink
             className="nav-links"
             to="/artists"
-            style={{ fontSize: "18px" }}
+            style={{ fontSize: "20px" }}
           >
-            <Icon
-              name="search"
-              style={{
-                color: "#d7d7d7",
-                padding: "5px",
-                marginRight: "12px",
-              }}
-            />
             Artists
           </NavLink>
         </Grid.Column>
 
-        <Grid.Column width={2} floated="right">
+        <Grid.Column verticalAlign="middle" width={3} floated="right">
           {isAuthed ? (
             <Button
               className="logout-btn"
-              fluid
+              size="mini"
               compact
-              size="tiny"
-              basic
-              inverted
               circular
+              style={{ backgroundColor: "#000" }}
             >
               {" "}
               <Dropdown
                 trigger={
-                  <span>
-                    <Icon
-                      size="large"
-                      name="user circle"
-                      color="green"
-                      style={{ marginRight: "8px" }}
-                    />
-                    {user.name}{" "}
+                  <span
+                    style={{
+                      fontSize: "14px",
+                      letterSpacing: "1px",
+                      fontFamily: "Lato",
+                      color: "#fff",
+                      fontWeight: "100",
+                    }}
+                  >
+                    <Icon size="large" inverted name="user circle" />
+                    {user.username}
                   </span>
                 }
                 options={options}
+                labeled
+                style={{ minWidth: "min-content" }}
               />
             </Button>
           ) : (
@@ -196,7 +155,7 @@ const TopNav = ({ curPlaying }) => {
                 fluid
                 basic
                 inverted
-                color="teal"
+                color="grey"
                 content="Login"
                 icon="user"
                 size="small"

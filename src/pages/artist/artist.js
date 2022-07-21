@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { settings } from "../../config/config";
 import {
   Grid,
@@ -26,8 +26,18 @@ import {
 
 import { useAuth } from "../../services/useAuth";
 
-const Artist = ({ setCurplaying, activeSong, setActiveSong}) => {
+const Artist = ({
+  setCurplaying,
+  activeSong,
+  setActiveSong,
+  pause,
+  setPause,
+  pauseSong,
+  playSong,
+  setCurartist,
  
+}) => {
+  const [open, setOpen] = useState(false);
   const { user } = useAuth();
   const [subHeading, setSubHeading] = useOutletContext();
   const { artistId } = useParams();
@@ -38,11 +48,15 @@ const Artist = ({ setCurplaying, activeSong, setActiveSong}) => {
     isLoading,
     data: artist,
   } = useXmlHttp(url, "GET", { Authorization: `Bearer ${user.jwt}` });
-
+ 
   function handleClick() {
     navigate(`/artists`);
   }
-  
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [artistId]);
+
  
   return (
     <Segment basic>
@@ -60,8 +74,8 @@ const Artist = ({ setCurplaying, activeSong, setActiveSong}) => {
         </Dimmer>
       )}
 
-      {artist && (   
-    
+      {artist && (
+  
         <Grid centered stackable doubling>
           <Grid.Row style={{ padding: "0px 20px 20px" }}>
             <Grid.Column width={8}>
@@ -133,27 +147,44 @@ const Artist = ({ setCurplaying, activeSong, setActiveSong}) => {
                     >
                       <List.Item
                         className="track-row"
-                        onClick={() => { 
+                        style={
+                          activeSong === t.title && !pause
+                            ? { padding: "4px", backgroundColor: "#0f0f0f" }
+                            : { padding: "4px" }
+                        }
+                        onClick={() => {
                           setCurplaying(t.mp3file);
-                          setActiveSong(t.track_id);
+                          setActiveSong(t.title);
+                          setPause(false);
+                          setCurartist(artist.name);
+                     
                         }}
-                        style={{ padding: "6px" }}
                       >
-                        {activeSong === t.track_id ? (
+                        {activeSong === t.title && !pause ? (
                           <List.Icon
-                            name="play circle"
+                            name="pause circle outline"
                             size="large"
                             verticalAlign="middle"
-                            color="green"
+                            style={{ color: "#fff", fontSize: "16px" }}
+                            onClick={pauseSong}
                           />
                         ) : (
                           <List.Icon
                             verticalAlign="middle"
                             size="large"
                             name="play circle"
+                            style={{ color: "#f8f8f8c8", fontSize: "16px" }}
+                            onClick={playSong}
                           />
                         )}
-                        <List.Content verticalAlign="middle">
+                        <List.Content
+                          verticalAlign="middle"
+                          style={
+                            activeSong === t.title && !pause
+                              ? { color: "#fff" }
+                              : { color: "#f8f8f8c8" }
+                          }
+                        >
                           {t.title}
                         </List.Content>
                       </List.Item>
@@ -162,7 +193,7 @@ const Artist = ({ setCurplaying, activeSong, setActiveSong}) => {
               </Segment>
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row style={{padding: '0px 0px 16px 0px', margin: '0px'}}>
+          <Grid.Row style={{ padding: "0px 0px 16px 0px", margin: "0px" }}>
             <Outlet context={[subHeading, setSubHeading]} />
           </Grid.Row>
           <Grid

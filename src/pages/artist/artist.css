@@ -12,7 +12,7 @@
 
 .artist-image {
   transition: all 0.2s;
-  opacity: 88%;
+  opacity: 82%;
 }
 
 .prev-button {
@@ -99,38 +99,25 @@
   min-width: 12% !important;
 }
 
-/* .prev-icon {
-  color: #e2e1e349 !important;
-  cursor: pointer;
-  padding-left: 30px;
-  transition: 0.2s;
-} */
 
-/* .prev-icon:hover {
-  transition: 0.2s;
-  color: #e2e1e3d6 !important;
-} */
-
-.ui.inverted.form input:not([type]),
-.ui.inverted.form input[type="date"],
-.ui.inverted.form input[type="datetime-local"],
-.ui.inverted.form input[type="email"],
-.ui.inverted.form input[type="file"],
-.ui.inverted.form input[type="number"],
-.ui.inverted.form input[type="password"],
-.ui.inverted.form input[type="search"],
-.ui.inverted.form input[type="tel"],
-.ui.inverted.form input[type="text"],
-.ui.inverted.form input[type="time"],
-.ui.inverted.form input[type="url"] {
-  background: linear-gradient(200deg, #030408, #010103);
-  border: 1px solid #201d1d;
-  box-shadow: 1px 2px 10px #110e0e;
-  color: #e2e1e3d6;
+.ui.form input:not([type]),
+.ui.form input[type="date"],
+.ui.form input[type="datetime-local"],
+.ui.form input[type="email"],
+.ui.form input[type="file"],
+.ui.form input[type="number"],
+.ui.form input[type="password"],
+.ui.form input[type="search"],
+.ui.form input[type="tel"],
+.ui.form input[type="text"],
+.ui.form input[type="time"],
+.ui.form input[type="url"] {
+  background: #efefef;
+  color: #040404;
 }
 
 .ui.icon {
-  color: #e2e1e3d6;
+  color: #040404;
 }
 
 .album-header {
@@ -176,20 +163,41 @@
 }
 
 .track-row:hover {
-  background-color: #0b0b0b !important;
+  background-color: #0f0f0f !important;
+   
 }
 
 .track-row:hover > i {
-  color: #21b744;
+  color: #fff !important;
 }
 
 .top-tracks-container {
   padding-right: 40px !important;
 }
 
+i.icon.play.circle.outline:before {
+  border: 0px !important;
+}
+
+.field.desktop {
+  padding: 0px 4px !important;
+}
+
 @media screen and (max-width: 766px) {
+   .main {
+    padding-bottom: 150px !important;
+  }
+
   .artist-image {
     min-height: 220px !important;
+  }
+
+  .ui.doubling.five.cards.image-group {
+    justify-content: center;
+  }
+
+  .image-group {
+    padding: 0px 20px !important;
   }
 
   .artist-name {
@@ -201,7 +209,8 @@
   }
 
   .artist-card {
-    margin: 50px 10px !important;
+    margin: 30px 10px !important;
+    min-width: 80% !important;
   }
 
   .album-card {
@@ -251,11 +260,13 @@
   }
 
   .search-bar-container {
-    padding: 0px 14px !important;
+    padding: 0px 20px !important;
   }
 }
 
 @media screen and (max-width: 378px) {
+ 
+
   .artist-image-device {
     border-radius: 50% !important;
   }

@@ -6,7 +6,7 @@ Description: This script creates a component that displays a form to edit album 
 */
 
 import {useState, useEffect} from "react";
-import UseFetch from "../../services/useFetch";
+import UseFetch from "../../../services/useFetch";
 import {useNavigate} from "react-router-dom";
 import {Button, Modal} from "semantic-ui-react";
 import {useForm} from "react-hook-form";

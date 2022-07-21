@@ -6,7 +6,7 @@ Description: This script creates a component for deleting an album
 */
 
 import {useState, useEffect} from "react";
-import UseFetch from "../../services/useFetch";
+import UseFetch from "../../../services/useFetch";
 import {Button, Modal} from "semantic-ui-react";
 import {useNavigate} from "react-router-dom";
 import JSONPretty from "react-json-pretty";

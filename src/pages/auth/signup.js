@@ -54,15 +54,10 @@ const Signup = () => {
         onOpen={() => setOpen(true)}
         open={open}
         closeIcon
-        size="mini"
+        size="tiny"
       >
         <Modal.Header>
-          <FontAwesomeIcon
-            className="logo"
-            icon={faHeadphonesSimple}
-            size="2x"
-            style={{ paddingRight: "10px" }}
-          />
+    
           <span> Create an Account</span>
         </Modal.Header>
         <Modal.Content>
@@ -88,12 +83,21 @@ const Signup = () => {
                                 in the navbar to explore the app."
             ></Message>
           ) : (
-            <Form onSubmit={createAccount}>
+            <Form autoComplete="off"  onSubmit={createAccount}>
               <Form.Field>
-                <label>Name</label>
+                <label>First Name</label>
                 <input
                   type="text"
-                  name="name"
+                  name="first_name"
+                  required
+                  onChange={handleInputChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>Last Name</label>
+                <input
+                  type="text"
+                  name="last_name"
                   required
                   onChange={handleInputChange}
                 />
@@ -127,7 +131,7 @@ const Signup = () => {
               </Form.Field>
               <Grid centered columns={1}>
                 <Grid.Column>
-                  <Button fluid size="small" type="submit" color="green">
+                  <Button fluid size="small" type="submit" color="violet">
                     Create Account
                   </Button>
                 </Grid.Column>

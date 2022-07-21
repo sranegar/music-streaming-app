@@ -6,7 +6,7 @@ Description: This script creates functionality for pagination for albums
 */
 
 
-import {settings} from "../../config/config";
+import {settings} from "../../../config/config";
 import {useState, useEffect} from "react";
 import {Grid, Header} from "semantic-ui-react";
 import {Link} from "react-router-dom";

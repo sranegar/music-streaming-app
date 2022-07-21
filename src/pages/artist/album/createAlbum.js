@@ -6,7 +6,7 @@ Description: This script creates a component for inserting a new album
 */
 
 import {useState, useEffect} from "react";
-import UseFetch from "../../services/useFetch";
+import UseFetch from "../../../services/useFetch";
 import {Button, Modal} from "semantic-ui-react";
 import {useForm} from "react-hook-form";
 import JSONPretty from "react-json-pretty";

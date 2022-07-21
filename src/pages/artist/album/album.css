@@ -27,7 +27,6 @@
 }
 
 .track-list-item:hover {
-    color: #c724ac !important;
     background-color: #0b0b0b !important;
 }
 
@@ -174,8 +173,18 @@ ul {
     min-width: 90% !important; 
   }
 
+  .fa-x {
+    position: absolute !important;
+    right: 20px !important;
+    z-index: 100;
+    bottom: -60px !important;
+    color: #f6f6f6ea !important;
+    font-size: 30px !important;
+ 
+  }
+   
   .album-view-row {
-    padding: 0px 3px !important;
+    padding: 0px 16px !important;
   }
 
   .track-list-container {

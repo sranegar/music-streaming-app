@@ -5,20 +5,15 @@ File: artist.js
 Description: Create a component to list all the artists
 */
 
-import { settings } from "../../config/config";
 import {
   Grid,
   Header,
   Image,
   Loader,
   Dimmer,
-  Divider,
   Card,
-  Container,
-  Segment,
   Form,
   Button,
-  Icon,
 } from "semantic-ui-react";
 import "./artist.css";
 import { useState, useEffect } from "react";
@@ -31,10 +26,8 @@ const Artist = () => {
   const { pathname } = useLocation();
   const [subHeading, setSubHeading] = useState("All Artists");
   const [artistView, setArtistView] = useState(false);
- 
-  const { error, isLoading, data: artists, getAll, search } = UseFetch();
 
- 
+  const { error, isLoading, data: artists, getAll, search } = UseFetch();
 
   useEffect(() => {
     setSubHeading("All Artists");
@@ -43,10 +36,9 @@ const Artist = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    const term = document.getElementById("artist-search-term").value;
+    let term = document.getElementById("artist-search-term").value;
     if (term == "") setSubHeading("All Artists");
-    else if (isNaN(term))
-      setSubHeading("results for '" + term + "'");
+    else if (isNaN(term)) setSubHeading("results for '" + term + "'");
     search(term);
   };
 
@@ -56,9 +48,9 @@ const Artist = () => {
     search("");
     setSubHeading("Trending Artists");
   };
-  
+ 
   return (
-    <Grid columns={1} centered style={{ padding: "0px 0px" }}>
+    <Grid className='main' columns={1} centered style={{ padding: "0px 0px" }}>
       {error && <div>{error}</div>}
       <Grid.Row>
         <Outlet context={[subHeading, setSubHeading]} />
@@ -74,68 +66,62 @@ const Artist = () => {
           />
         </Dimmer>
       )}
- 
+
       <Grid
         centered
-        columns={2}
+        columns={3}
         style={{
           minHeight: "100vh",
           padding: "10px 14px 40px",
-          minWidth: "100%",
         }}
       >
-        {/* <Grid.Column width={15} className="searchbar-mobile device">
-            <Form
-              className="device"
-              inverted
-              size="small"
-              style={{ padding: "0px 10px 20px", minWidth: "100%" }}
-              onSubmit={handleSearch}
-            >
-              <Form.Input
-                size="small"
-                width={16}
-                id="artist-search-term"
-                placeholder="Search artists..."
-              />
-            </Form>
-          </Grid.Column> */}
-
-        <Grid.Column
+        <Grid.Row
           className="search-bar-container"
-          style={{ minWidth: "100%", height: "60px", padding: "0px 70px" }}
+          style={{
+            height: "60px",
+            padding: "10px 80px",
+          }}
         >
-          <Form inverted onSubmit={handleSearch} style={{ width: "100%" }}>
+          <Form
+            autoComplete="off"
+          
+            onSubmit={handleSearch}
+            style={{ width: "100%" }}
+          >
             <Form.Group>
               <Form.Input
-                width={16}
+                width={9}
                 id="artist-search-term"
                 placeholder="Search music by artists..."
                 icon="search"
                 iconPosition="left"
               />
-              <Button
-                circular
+
+              <Form.Button
                 inverted
+                basic
+                size="mini"
                 className="desktop"
                 color="grey"
                 type="submit"
-                style={{ marginLeft: "4px" }}
                 icon="search"
+                style={{ margin: "5px 0px", fontSize: "11px" }}
               />
-              <Button
-                circular
+
+              <Form.Button
                 className="desktop"
                 basic
+                size="mini"
                 inverted
                 color="grey"
-                style={{ marginLeft: "4px" }}
+               
                 onClick={clearSearchBox}
                 icon="refresh"
+                style={{ margin: "5px 10px 5px 0px", fontSize: "11px" }}
               />
             </Form.Group>
           </Form>
-        </Grid.Column>
+        </Grid.Row>
 
         <Grid
           className="desktop"
@@ -167,7 +153,6 @@ const Artist = () => {
 
         <Card.Group
           doubling
-          stackable
           itemsPerRow={5}
           className="image-group"
           style={{
@@ -178,14 +163,9 @@ const Artist = () => {
           {artists &&
             artists.map((artist, i) => (
               <Card key={i} raised className="artist-card artist-page-grid">
-                <NavLink
-            
-                  to={`/artists/${artist.id}`}
-                  onClick={() => setArtistView(true)}
-                >
+                <NavLink to={`/artists/${artist.id}`}>
                   <Image
                     centered
-                    
                     size="huge"
                     className="artist-image desktop"
                     src={artist.image}

@@ -6,8 +6,8 @@ Description: Create two components. Create a component to list all the albums AN
 that list all albums by an artist that renders inside the Artist component
 */
 
-import { settings } from "../../config/config";
-import useXmlHttp from "../../services/useXmlHttp";
+import { settings } from "../../../config/config";
+import useXmlHttp from "../../../services/useXmlHttp";
 import {
   useOutletContext,
   Outlet,
@@ -32,9 +32,9 @@ import {
 } from "semantic-ui-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faMusic } from "@fortawesome/free-solid-svg-icons";
-import { useAuth } from "../../services/useAuth";
+import { useAuth } from "../../../services/useAuth";
 import { useState, useEffect } from "react";
-import UseFetch from "../../services/useFetch";
+import UseFetch from "../../../services/useFetch";
 import CreateAlbum from "./createAlbum";
 import DeleteAlbum from "./deleteAlbum";
 import EditAlbum from "./editAlbum";
@@ -344,34 +344,18 @@ const Albums = () => {
 
 const AlbumsByArtist = () => {
   const [subHeading, setSubHeading] = useState("All Albums");
-  const [albumById, setAlbumById] = useState(false);
   const { pathname } = useLocation();
-  let navigate = useNavigate();
-  const { user } = useAuth();
   const { artistId } = useParams();
-  const url = settings.baseApiUrl + "/artists/" + artistId + "/albums";
-  const {
-    error,
-    isLoading,
-    data: albums,
-  } = useXmlHttp(url, "GET", { Authorization: `Bearer ${user.jwt}` });
-
-  
+ 
   useEffect(() => {
     setSubHeading("All Albums");
   }, [pathname]);
 
-  function handleOnClick() {
-    if (subHeading === "All Albums") {
-      navigate(`/artists/${artistId}`);
-    } else navigate(`/artists/${artistId}/albums`);
-    setAlbumById(false);
-  }
-
+ 
   return (
     
       <Grid centered>
-        <Outlet context={[subHeading, setSubHeading]} />
+      <Outlet context={[subHeading, setSubHeading]} />
       </Grid>
   
   );

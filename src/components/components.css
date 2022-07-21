@@ -1,64 +1,90 @@
 .nav-bar {
-    /* background: linear-gradient(200deg, #bfaa23, #ff4949,   #5836df ); */
-   background-color: #1e2337;
+  background-image: linear-gradient(
+    19deg,
+    rgb(17, 16, 43),
+    rgb(15, 15, 15),
+    rgb(9, 8, 8)
+  );
 }
- 
 
 .nav-links {
-    color: #d7d7d7 !important;
-    letter-spacing: .4px;
-    font-variant-caps: all-petite-caps;
-    transition: 0.2s ease-in, 0.2s ease-out;
-    margin-top: 40px !important; 
-   
+  color: #d7d7d7;
+  letter-spacing: 0.4px;
+  font-variant-caps: all-petite-caps;
+  transition: 0.2s ease-in, 0.2s ease-out;
+  margin-top: 40px !important;
 }
 
 span {
-    color: #d7d7d7 !important;
-
+  color: #d7d7d7 !important;
 }
-
-
 
 .nav-links:hover > i.icon {
-    color: #bdbdbd !important;
-    transition: 0.2s ease-in, 0.2s ease-out;
+  color: #bdbdbd !important;
+  transition: 0.2s ease-in, 0.2s ease-out;
 }
 
-
-.logo {
-    transition: 0.2s ease-in, 0.2s ease-out;
-}
-
-.logo:hover {
-    color: #0cac6b !important;
-    cursor: pointer;
-    background-size: 100%;
-    background-repeat: repeat;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-background-clip: text;
-    -moz-text-fill-color: transparent;
-    transition: 0.2s ease-in, 0.2s ease-out;
-    transition: 0.9s;
-    transform: rotateY(180deg);
-
+.nav-links:hover {
+  color: #bdbdbd !important;
+  transition: 0.2s ease-in, 0.2s ease-out;
 }
 
 .logout-btn {
-    min-width: 130px !important;
+  min-width: 130px !important;
 }
 
 .device {
-    display: none !important;
+  display: none !important;
+}
+
+.ui.dropdown {
+  cursor: pointer !important;
+  text-align: right !important;
+  padding: 0px 10px 0px 0px;
+}
+
+.ui.dropdown .menu {
+  min-width: 300px !important;
+  text-align: right !important;
+  background-color: #111 !important;
+  border: none !important;
+  top: 50px !important;
+  left: -170px !important;
+}
+
+.dropdown.icon:before {
+  font-size: 11px !important;
+  color: #fff !important;
+}
+
+.ui.dropdown .menu > .item {
+  text-align: right !important;
+}
+ 
+i.user.circle.large.inverted.icon  {
+     display: inline !important;
+  margin-right: 20px;
+  background: linear-gradient(45deg, #5eadde 30%,  #7d66f1 90%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+ 
+}
+
+@keyframes slidebg {
+  to {
+    background-position: 100vw;
+  }
 }
 
 @media screen and (max-width: 766px) {
-    .device {
-        display: flex !important;
-    }
+  .device {
+    display: flex !important;
+  }
 
-    .desktop {
-        display: none !important;
-    }
+  .desktop {
+    display: none !important;
+  }
 }

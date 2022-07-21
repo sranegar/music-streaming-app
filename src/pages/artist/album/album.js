@@ -6,7 +6,7 @@ Description: Create a component to display album details
 */
 
 import React from "react";
-import { settings } from "../../config/config";
+import { settings } from "../../../config/config";
 import {
   Grid,
   Header,
@@ -18,9 +18,10 @@ import {
   Divider,
   Container,
   Icon,
+  Modal,
 } from "semantic-ui-react";
 import "./album.css";
-import useXmlHttp from "../../services/useXmlHttp";
+import useXmlHttp from "../../../services/useXmlHttp";
 import {
   useParams,
   useOutletContext,
@@ -29,12 +30,22 @@ import {
 } from "react-router-dom";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark, faMusic } from "@fortawesome/free-solid-svg-icons";
-import { useAuth } from "../../services/useAuth";
+import { faSquareXmark } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "../../../services/useAuth";
 
-const AlbumByArtist = ({ setCurplaying, activeSong, setActiveSong }) => {
+const AlbumByArtist = ({
+  setCurplaying,
+  activeSong,
+  setActiveSong,
+  setPause,
+  pause,
+  pauseSong,
+  playSong,
+  setCurartist,
+}) => {
   const { user } = useAuth();
   const [albumById, setAlbumById] = useState(false);
+
   let navigate = useNavigate();
   const [subHeading, setSubHeading] = useOutletContext();
   const { artistId, albumId } = useParams();
@@ -50,10 +61,8 @@ const AlbumByArtist = ({ setCurplaying, activeSong, setActiveSong }) => {
     if (subHeading === "All Albums") {
       navigate(`/artists/${artistId}`);
     } else navigate(`/artists/${artistId}/albums`);
-    setAlbumById(false);
   }
  
-  console.log(album)
   return (
     <Grid stackable columns={3} style={{ paddingTop: "0px" }}>
       {error && <div>{error}</div>}
@@ -79,17 +88,19 @@ const AlbumByArtist = ({ setCurplaying, activeSong, setActiveSong }) => {
         >
           {setSubHeading(album.title)}
           <Grid.Column
-            width={15}
+            className='x-mark'
+            width={16}
             textAlign="right"
-            style={{ padding: "0px", margin: "0px" }}
+            style={{ padding: "0px 40px", margin: "0px" }}
           >
-            <Icon
-              name="remove"
-              size="large"
+            <FontAwesomeIcon
+              icon={faSquareXmark}
+              className='fa-x'
+              size="2xl"
               onClick={handleOnClick}
               style={{
                 cursor: "pointer",
-                color: "#21ba45",
+                color: "#E2E1E3D6",
                 padding: "10px 0px",
               }}
             />
@@ -104,12 +115,10 @@ const AlbumByArtist = ({ setCurplaying, activeSong, setActiveSong }) => {
               </Header>
               <Grid doubling columns={3}>
                 {album.artists.map((artist, index) => (
-                  <Grid.Column  key={index}>
+                  <Grid.Column key={index}>
                     <Header as="h6">
                       {artist.name}
-                      <span style={{padding: "0px 8px"}}>
-                        |
-                      </span>
+                      <span style={{ padding: "0px 8px" }}>|</span>
                       {album.year_released}
                     </Header>
                   </Grid.Column>
@@ -126,29 +135,49 @@ const AlbumByArtist = ({ setCurplaying, activeSong, setActiveSong }) => {
                   inverted
                   celled
                   ordered
-                  style={{ color: "white", padding: "20px 10px" }}
+                  style={{ color: "#f8f8f8db", padding: "20px 10px" }}
                 >
                   {album.tracks.map((track, index) => (
                     <List.Item
                       className="track-list-item"
                       key={index}
-                      onClick={() => {
-                        setCurplaying(track.mp3file);
-                        setActiveSong(track.track_id);
-                      }}
                       style={
-                        activeSong === track.track_id
+                        activeSong === track.title && !pause
                           ? {
                               padding: "8px",
                               backgroundColor: "#0b0b0b",
-                              color: "#c724ac",
+                              color: "#fff",
                             }
                           : { padding: "8px" }
                       }
+                      onClick={() => {
+                        setCurplaying(track.mp3file);
+                        setActiveSong(track.title);
+                        setPause(false);
+                        {
+                          album.artists.map((a) => setCurartist(a.name));
+                        }
+                      }}
                     >
-                      <List.Content style={{ paddingLeft: "10px" }}>
-                        {track.title}
-                      </List.Content>
+                      {activeSong === track.title && !pause ? (
+                        <List.Content
+                          style={{
+                            paddingLeft: "10px",
+                          }}
+                          onClick={pauseSong}
+                        >
+                          {track.title}
+                        </List.Content>
+                      ) : (
+                        <List.Content
+                          style={{
+                            paddingLeft: "10px",
+                          }}
+                          onClick={playSong}
+                        >
+                          {track.title}
+                        </List.Content>
+                      )}
                     </List.Item>
                   ))}
                 </List>

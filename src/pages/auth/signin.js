@@ -18,10 +18,17 @@ import {
   Grid,
   Icon,
   Message,
+  Image,
+  SegmentGroup,
+  Header,
 } from "semantic-ui-react";
 import "./auth.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeadphonesSimple } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHeadphonesSimple,
+  faLongArrowRight,
+} from "@fortawesome/free-solid-svg-icons";
+import { logDOM } from "@testing-library/react";
 
 const Signin = () => {
   const [open, setOpen] = useState(true);
@@ -58,17 +65,18 @@ const Signin = () => {
         onOpen={() => setOpen(true)}
         open={open}
         closeIcon
-        size="mini"
+        size="tiny"
       >
-        <Modal.Header>
-          {" "}
-          <FontAwesomeIcon
-            className="logo"
-            icon={faHeadphonesSimple}
-            size="2x"
-            style={{ paddingRight: "10px" }}
-          />
-          <span className='signin-header'>Login</span>
+        <Modal.Header
+          as="h3"
+          style={{
+            display: "flex",
+            textAlign: "center",
+            alignItems: "center",
+            color: "24c8ad",
+          }}
+        >
+          Login
         </Modal.Header>
         <Modal.Content>
           {error && (
@@ -80,8 +88,8 @@ const Signin = () => {
             <Message icon>
               <Icon name="circle notched" loading />
               <Message.Content>
-                <Message.Header>Just one second</Message.Header>
-                Please wait while data is being loaded
+                <Message.Header>Hold up...</Message.Header>
+                Please wait while data is being loaded.
               </Message.Content>
             </Message>
           )}
@@ -92,7 +100,7 @@ const Signin = () => {
               content="Discover new artists at the top navigation."
             ></Message>
           ) : (
-            <Form onSubmit={verifyAccount}>
+            <Form autoComplete="off" onSubmit={verifyAccount}>
               <Form.Field>
                 <label>Username</label>
                 <input
@@ -114,18 +122,19 @@ const Signin = () => {
               <Grid centered columns={1}>
                 <Grid.Column>
                   <Button
-                    className="form-btn"
                     fluid
                     size="small"
                     type="submit"
-                    color="green"
-                  >
-                    Login
-                  </Button>
+                    content="Login"
+                    color="violet"
+                  />
                 </Grid.Column>
               </Grid>
 
-              <Segment textAlign="center">
+              <Segment
+                textAlign="center"
+                style={{ backgroundColor: "#efefefea" }}
+              >
                 <p>
                   Don't have an account? <Link to="/signup">Sign up</Link>
                 </p>
