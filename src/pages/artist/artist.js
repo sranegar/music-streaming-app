@@ -58,6 +58,7 @@ const Artist = ({
   }, [artistId]);
 
  
+ 
   return (
     <Segment basic>
       {error && <div>{error}</div>}

@@ -99,7 +99,7 @@
   min-width: 12% !important;
 }
 
-
+/* 
 .ui.form input:not([type]),
 .ui.form input[type="date"],
 .ui.form input[type="datetime-local"],
@@ -114,10 +114,34 @@
 .ui.form input[type="url"] {
   background: #efefef;
   color: #040404;
+} */
+
+#artist-search-term {
+  min-width: 300px;
+  color: #e2e1e3d6 ;
 }
 
+#artist-search-term-mobile {
+ 
+  color: #e2e1e3d6 ;
+}
+ 
 .ui.icon {
-  color: #040404;
+  color: #e2e1e3d6 ;
+}
+
+button.ui.grey.mini.basic.compact.icon.button.refresh-btn  {
+ 
+  box-shadow: none !important;
+}
+
+i.icon.refresh:before {
+   font-size: 14px !important;
+   
+}
+
+button.ui.grey.mini.basic.compact.icon.button.refresh-btn.desktop:hover {
+   color: #e2e1e3d6 !important;
 }
 
 .album-header {
@@ -164,7 +188,6 @@
 
 .track-row:hover {
   background-color: #0f0f0f !important;
-   
 }
 
 .track-row:hover > i {
@@ -184,9 +207,11 @@ i.icon.play.circle.outline:before {
 }
 
 @media screen and (max-width: 766px) {
-   .main {
+  .main {
     padding-bottom: 150px !important;
   }
+
+
 
   .artist-image {
     min-height: 220px !important;
@@ -265,8 +290,6 @@ i.icon.play.circle.outline:before {
 }
 
 @media screen and (max-width: 378px) {
- 
-
   .artist-image-device {
     border-radius: 50% !important;
   }
@@ -286,8 +309,7 @@ i.icon.play.circle.outline:before {
     margin-top: -20px !important;
     font-size: 24px;
   }
+ 
+ 
 
-  .searchbar-mobile {
-    min-width: 100% !important;
-  }
 }

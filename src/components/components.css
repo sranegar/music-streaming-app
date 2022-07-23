@@ -60,22 +60,32 @@ span {
 .ui.dropdown .menu > .item {
   text-align: right !important;
 }
- 
-i.user.circle.large.inverted.icon  {
-     display: inline !important;
+
+i.user.circle.large.inverted.icon {
+  display: inline !important;
   margin-right: 20px;
-  background: linear-gradient(45deg, #5eadde 30%,  #7d66f1 90%);
+  background: linear-gradient(45deg, #5eadde 30%, #7d66f1 90%);
   background-size: 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -moz-background-clip: text;
   -moz-text-fill-color: transparent;
- 
 }
 
 @keyframes slidebg {
   to {
     background-position: 100vw;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .logout-btn {
+    min-width: 160px !important;
+  }
+
+  .dropdown.icon:before {
+    font-size: 11px !important;
+    color: #fff !important;
   }
 }
 

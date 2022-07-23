@@ -12,8 +12,9 @@ import {
   Loader,
   Dimmer,
   Card,
-  Form,
+  Input,
   Button,
+  Segment,
 } from "semantic-ui-react";
 import "./artist.css";
 import { useState, useEffect } from "react";
@@ -26,6 +27,7 @@ const Artist = () => {
   const { pathname } = useLocation();
   const [subHeading, setSubHeading] = useState("All Artists");
   const [artistView, setArtistView] = useState(false);
+  const [searchResults, setSearchResults] = useState("");
 
   const { error, isLoading, data: artists, getAll, search } = UseFetch();
 
@@ -42,15 +44,26 @@ const Artist = () => {
     search(term);
   };
 
+  const handleSearchOnMobile = (e) => {
+    e.preventDefault();
+    let mobileTerm = document.getElementById("artist-search-term-mobile").value;
+    if (mobileTerm == "") setSubHeading("All Artists");
+    else if (isNaN(mobileTerm))
+      setSubHeading("results for '" + mobileTerm + "'");
+    search(mobileTerm);
+  };
+
   const clearSearchBox = (e) => {
     e.preventDefault();
     document.getElementById("artist-search-term").value = "";
+    document.getElementById("artist-search-term-mobile").value = "";
+
     search("");
     setSubHeading("Trending Artists");
   };
- 
+
   return (
-    <Grid className='main' columns={1} centered style={{ padding: "0px 0px" }}>
+    <Grid className="main" columns={1} centered style={{ padding: "0px 0px" }}>
       {error && <div>{error}</div>}
       <Grid.Row>
         <Outlet context={[subHeading, setSubHeading]} />
@@ -68,7 +81,6 @@ const Artist = () => {
       )}
 
       <Grid
-        centered
         columns={3}
         style={{
           minHeight: "100vh",
@@ -76,51 +88,39 @@ const Artist = () => {
         }}
       >
         <Grid.Row
-          className="search-bar-container"
+          className="search-bar-container desktop"
           style={{
             height: "60px",
-            padding: "10px 80px",
+            padding: "10px 73px",
           }}
         >
-          <Form
-            autoComplete="off"
-          
-            onSubmit={handleSearch}
-            style={{ width: "100%" }}
+          <Segment
+            className="search-bar-mobile"
+            inverted
+            style={{ padding: "4px 16px 2px" }}
           >
-            <Form.Group>
-              <Form.Input
-                width={9}
-                id="artist-search-term"
-                placeholder="Search music by artists..."
-                icon="search"
-                iconPosition="left"
-              />
+            <Input
+              size="small"
+              autoComplete="off"
+              id="artist-search-term"
+              placeholder="Search music by artists..."
+              icon="search"
+              iconPosition="left"
+              onChange={handleSearch}
+              transparent
+            />
 
-              <Form.Button
-                inverted
-                basic
-                size="mini"
-                className="desktop"
-                color="grey"
-                type="submit"
-                icon="search"
-                style={{ margin: "5px 0px", fontSize: "11px" }}
-              />
-
-              <Form.Button
-                className="desktop"
-                basic
-                size="mini"
-                inverted
-                color="grey"
-               
-                onClick={clearSearchBox}
-                icon="refresh"
-                style={{ margin: "5px 10px 5px 0px", fontSize: "11px" }}
-              />
-            </Form.Group>
-          </Form>
+            <Button
+              className="refresh-btn"
+              basic
+              compact
+              size="mini"
+              color="grey"
+              onClick={clearSearchBox}
+              icon="refresh"
+              style={{ margin: "5px 0px" }}
+            />
+          </Segment>
         </Grid.Row>
 
         <Grid
@@ -151,6 +151,63 @@ const Artist = () => {
           </Header>
         </Grid>
 
+        <Grid.Row
+          className="search-container-mobile device"
+          style={{
+            padding: "0px 10px",
+          }}
+        >
+          <Segment
+            inverted
+            style={{ padding: "10px 6px 0px 10px", minWidth: "100%" }}
+          >
+            <Input
+              size="small"
+              autoComplete="off"
+              id="artist-search-term-mobile"
+              placeholder="Search music by artists..."
+              icon="search"
+              iconPosition="left"
+              onChange={handleSearchOnMobile}
+              transparent
+              style={{ width: "60%" }}
+            />
+
+            <Button
+              className="refresh-btn"
+              floated="right"
+              basic
+              compact
+              size="mini"
+              color="grey"
+              onClick={clearSearchBox}
+              icon="refresh"
+              style={{ margin: "0px 0px 6px" }}
+            />
+          </Segment>
+        </Grid.Row>
+
+        <Grid className="device" style={{ marginTop: "10px" }}>
+          <Header
+            textAlign="left"
+            as="h4"
+            inverted
+            style={{ padding: "10px 30px" }}
+          >
+            Artists{" "}
+            <span
+              style={{
+                fontWeight: "lighter",
+                fontStyle: "italic",
+                fontSize: "16px",
+                letterSpacing: "1.1px",
+              }}
+            >
+              {" "}
+              / {subHeading}
+            </span>
+          </Header>
+        </Grid>
         <Card.Group
           doubling
           itemsPerRow={5}

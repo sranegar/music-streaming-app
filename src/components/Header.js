@@ -152,6 +152,8 @@ const TopNav = () => {
               {" "}
               <Button
                 className="login-btn"
+                compact
+                circular
                 fluid
                 basic
                 inverted
