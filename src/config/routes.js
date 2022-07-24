@@ -20,9 +20,11 @@ const AppRoutes = () => {
   const [curArtist, setCurartist] = useState(null);
   const [pause, setPause] = useState(true);
   const [curProgress, setCurProgress] = useState(0);
-
+  const [album, setAlbum] = useState(null);
+  const [albumImage, setAlbumImage] = useState('');
   const audio = document.getElementById("audio");
  
+  
   const pauseSong = () => {
     setPause(true);
     clearInterval(curPlaying)
@@ -40,7 +42,7 @@ const AppRoutes = () => {
    
   }
 
-
+ 
   return (
     <BrowserRouter>
       <AuthProvider
@@ -49,6 +51,7 @@ const AppRoutes = () => {
         setCurplaying={setCurplaying}
         setActiveSong={setActiveSong}
         setCurartist={setCurartist}
+        setAlbumImage={setAlbumImage}
       >
         <Routes>
           <Route
@@ -68,6 +71,9 @@ const AppRoutes = () => {
                 setCurProgress={setCurProgress}
                 curProgress={curProgress}
                 audio={audio}
+                setAlbum={setAlbum}
+                setAlbumImage={setAlbumImage}
+                albumImage={albumImage}
               />
             }
           >
@@ -94,6 +100,7 @@ const AppRoutes = () => {
                     playSong={playSong}
                     setCurartist={setCurartist}
                     audio={audio}
+                    setAlbumImage={setAlbumImage}
                   />
                 }
               >
@@ -111,6 +118,8 @@ const AppRoutes = () => {
                         playSong={playSong}
                         setCurartist={setCurartist}
                         audio={audio}
+                        setAlbum={setAlbum}
+                        setAlbumImage={setAlbumImage}
                       />
                     }
                   />

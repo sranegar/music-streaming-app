@@ -35,7 +35,7 @@ const Artist = ({
   pauseSong,
   playSong,
   setCurartist,
- 
+  setAlbumImage,
 }) => {
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
@@ -158,7 +158,7 @@ const Artist = ({
                           setActiveSong(t.title);
                           setPause(false);
                           setCurartist(artist.name);
-                     
+                          {artist.albums.filter((a) => artist.collections.find((c) => c.chapter === t.chapter && a.number === c.album)).map((a) => setAlbumImage(a.image))}
                         }}
                       >
                         {activeSong === t.title && !pause ? (

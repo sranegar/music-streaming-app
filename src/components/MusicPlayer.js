@@ -6,12 +6,16 @@ import {
   List,
   Dimmer,
   Loader,
+  Input,
+  Image,
+  Item,
 } from "semantic-ui-react";
 import "./musicplayer.css";
 import { useAuth } from "../services/useAuth";
 import { useRef, useState } from "react";
 import moment from "moment";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faVolumeLow, faVolumeMute } from "@fortawesome/free-solid-svg-icons";
 const MusicPlayer = ({
   curPlaying,
   activeSong,
@@ -20,13 +24,52 @@ const MusicPlayer = ({
   pauseSong,
   playSong,
   curArtist,
+  albumImage,
 }) => {
   const { isAuthed } = useAuth();
-
+  var player = document.getElementById("audio");
+  var volControl = document.getElementById("vol-control");
   const audioRef = useRef();
 
-  const [completed, setCompleted] = useState(0);
+  const [completed, setCompleted] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [mute, setMute] = useState(true);
+  const [volumeIcon, setVolumeIcon] = useState(false);
+  const [v, setValue] = useState(0.4);
+
+  function changeVolume(val) {
+    var player = document.getElementById("audio");
+    player.volume = val / 100;
+  }
+
+  function handleInputChange() {
+    const range = document.querySelector('input[type="range"]');
+
+    const min = range.min;
+    const max = range.max;
+    const val = range.value;
+    range.style.backgroundSize = ((val - min) * 100) / (max - min) + "%";
+  }
+
+  const toggleMute = () => {
+    var p = document.getElementById("audio");
+    setMute(!mute);
+    setVolumeIcon(!volumeIcon);
+    p.muted = mute;
+  };
+
+  function handleBarValue() {
+    const range = document.querySelector('input[type="range"]');
+
+    if (!mute) {
+      const min = range.min;
+      const max = range.max;
+
+      const val = range.value;
+
+      range.style.backgroundSize = ((val - min) * 100) / (max - min) + "%";
+    }
+  }
 
   return (
     <Segment basic padded>
@@ -59,7 +102,42 @@ const MusicPlayer = ({
 
       <Menu stackable widths={3} fixed="bottom" className="footer-menu">
         <Menu.Item position="left" widths={4}>
-          <List size="mini" style={{ minWidth: "80%", padding: "4px 16px" }}>
+          <Item.Group className="desktop" style={{ minWidth: "100%" }}>
+            <Item style={{ minWidth: "100%" }}>
+              <Item.Image src={`${albumImage}`} size="tiny" />
+              <Item.Content
+                style={{
+                  textAlign: "left",
+                  margin: "0px",
+                  padding: "0px 0px 0px 12px",
+                  maxWidth: "65%",
+                }}
+              >
+                <Item.Header className="song-title">{activeSong}</Item.Header>
+                <Item.Extra
+                  className="artist"
+                  style={{
+                    color: "#f1e9edc4  ",
+                    fontSize: "13px",
+                    minWidth: "100%",
+                    letterSpacing: "1px",
+                    fontFamily: "Lato",
+                    fontWeight: "lighter",
+                    fontVariantCaps: "all-petite-caps",
+                    padding: "0px",
+                    marginTop: "-2px",
+                  }}
+                >
+                  {curArtist}
+                </Item.Extra>
+              </Item.Content>
+            </Item>
+          </Item.Group>
+          {/* <List
+            className="device"
+            size="mini"
+            style={{ minWidth: "80%", padding: "4px 16px" }}
+          >
             <List.Item
               className="song-title"
               style={{
@@ -84,7 +162,7 @@ const MusicPlayer = ({
             >
               {curArtist}
             </List.Item>
-          </List>
+          </List> */}
         </Menu.Item>
         <Menu.Item
           style={{
@@ -249,7 +327,7 @@ const MusicPlayer = ({
                   )}
                   <progress
                     id="seekObj"
-                    value={isAuthed && activeSong ? completed : 0}
+                    value={isAuthed && activeSong ? completed : 1}
                     max="1"
                   ></progress>
                   {!activeSong && pause ? (
@@ -280,7 +358,32 @@ const MusicPlayer = ({
             </Grid>
           </Grid>
         </Menu.Item>
-        <Menu.Item className="desktop"></Menu.Item>
+        <Menu.Item className="desktop">
+          <FontAwesomeIcon
+            icon={volumeIcon ? faVolumeMute : faVolumeLow}
+            size="xl"
+            onClick={() => {
+              toggleMute();
+              handleBarValue();
+            }}
+            style={{
+              cursor: "pointer",
+              color: "#E2E1E3D6",
+              padding: "10px 10px",
+            }}
+          />
+          <input
+            id="vol-control"
+            type="range"
+            min="0"
+            max="100"
+            onChange={() => {
+              const initVol = document.getElementById("vol-control").value;
+              changeVolume(initVol);
+              handleInputChange();
+            }}
+          />
+        </Menu.Item>
       </Menu>
     </Segment>
   );

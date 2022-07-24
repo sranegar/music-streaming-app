@@ -27,6 +27,9 @@ const Body = ({
   setCurProgress,
   progress,
   audio,
+  setAlbum,
+  setAlbumImage,
+  albumImage,
 }) => {
   return (
     <>
@@ -38,7 +41,10 @@ const Body = ({
         setActiveSong={setActiveSong}
         pauseSong={pauseSong}
         audio={audio}
-      />
+        setAlbum={setAlbum}
+        setAlbumImage={setAlbumImage}
+        
+       />
       <MusicPlayer
         curPlaying={curPlaying}
         setCurplaying={setCurplaying}
@@ -54,6 +60,7 @@ const Body = ({
         curProgress={curProgress}
         setCurProgress={setCurProgress}
         audio={audio}
+        albumImage={albumImage}
       />
     </>
   );

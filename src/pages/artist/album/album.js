@@ -42,6 +42,8 @@ const AlbumByArtist = ({
   pauseSong,
   playSong,
   setCurartist,
+  setAlbum,
+  setAlbumImage,
 }) => {
   const { user } = useAuth();
   const [albumById, setAlbumById] = useState(false);
@@ -63,6 +65,8 @@ const AlbumByArtist = ({
     } else navigate(`/artists/${artistId}/albums`);
   }
  
+
+
   return (
     <Grid stackable columns={3} style={{ paddingTop: "0px" }}>
       {error && <div>{error}</div>}
@@ -151,6 +155,8 @@ const AlbumByArtist = ({
                           : { padding: "8px" }
                       }
                       onClick={() => {
+                        setAlbum(album.title);
+                        setAlbumImage(album.image);
                         setCurplaying(track.mp3file);
                         setActiveSong(track.title);
                         setPause(false);

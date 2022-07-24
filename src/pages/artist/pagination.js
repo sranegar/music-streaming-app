@@ -1,11 +1,3 @@
-/*
-Name: Stephanie Ranegar
-Date: 6/16/2022
-File: pagination.js
-Description: This script creates functionality for pagination for artists
-*/
-
-
 import {settings} from "../../config/config";
 import {useState, useEffect} from "react";
 import {Grid, Header} from "semantic-ui-react";

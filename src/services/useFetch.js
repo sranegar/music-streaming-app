@@ -34,6 +34,7 @@ const UseFetch = () => {
                 setIsLoading(false);
                 setError(null);
                 setData(data);
+                
             })
             .catch(err => {
                 setIsLoading(false);
@@ -44,7 +45,6 @@ const UseFetch = () => {
                 }
             });
     }
-
    
     // Get all
     const getAll = (id = null) => {
@@ -124,6 +124,9 @@ const UseFetch = () => {
         });
         handleResponse(promise);
     }
+
+     
+
 
     return {error, isLoading, data, get, getAll, update, remove, create, search};
 }

@@ -19,6 +19,7 @@ const AuthProvider = ({
   setCurartist,
   setActiveSong,
   setPause,
+  setAlbumImage,
 }) => {
   const [isAuthed, setIsAuthed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -78,6 +79,8 @@ const AuthProvider = ({
     setCurartist(null);
     setActiveSong(null);
     pauseSong();
+    setAlbumImage('');
+    
   };
 
   //signup function

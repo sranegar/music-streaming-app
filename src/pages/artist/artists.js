@@ -31,6 +31,8 @@ const Artist = () => {
 
   const { error, isLoading, data: artists, getAll, search } = UseFetch();
 
+
+  
   useEffect(() => {
     setSubHeading("All Artists");
     getAll();
