@@ -33,21 +33,6 @@ progress {
   border-radius: 5px;
 }
 
-.progress {
-  height: 4px;
-  min-width: 400px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-}
-
-#progress {
-  background: #333;
-  -webkit-border-radius: 13px;
-  height: 10px;
-  width: 70%;
-  padding: 3px;
-}
-
 #progress-value {
   background: orange;
   width: 5%;
@@ -68,12 +53,11 @@ progress[value]::-webkit-progress-value {
 
 input[type="range"] {
   -webkit-appearance: none;
-
   width: 130px;
-  height: 3px;
+  height: 2px;
   background: rgba(255, 255, 255, 0.788);
   border-radius: 5px;
-  background-image: linear-gradient(to bottom, #6d79ea, #4f58a9 );
+  background-image: linear-gradient(to bottom, #6d79ea, #4f58a9);
   background-size: 50%;
   cursor: pointer;
   background-repeat: no-repeat;
@@ -81,12 +65,11 @@ input[type="range"] {
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  height: 12px;
-  width: 12px;
+  height: 8px;
+  width: 8px;
   border-radius: 50%;
   background: #6d79ea;
   cursor: pointer;
-
   box-shadow: 0 0 2px 0 #555;
   transition: 0.2s ease-in-out;
 }
@@ -104,7 +87,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .song-title {
-  font-size: 19px !important;
+  font-size: 18px !important;
   font-weight: 900 !important;
   background-image: linear-gradient(
     45deg,
@@ -119,8 +102,26 @@ input[type="range"]::-webkit-slider-thumb:hover {
   animation: slidebg 250s linear infinite alternate !important;
   padding: 0px;
   margin: 0px;
- 
 }
+
+ .curplaying-container {
+    overflow: hidden !important;
+    white-space: nowrap !important;
+  }
+
+  .song-title-animate {
+    display: inline-block !important;
+    animation: marquee 10s linear infinite !important;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(-30%, 0);
+    }
+  }
 
 @keyframes slidebg {
   to {
@@ -135,9 +136,34 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 @media screen and (max-width: 1200px) {
+  progress {
+    min-width: 75%;
+  }
+  .song-title {
+    font-size: 15px !important;
+  }
+
+  input[type="range"] {
+    width: 65%;
+  }
+
+  .curplaying-container {
+    max-width: 70% !important;
+    padding-left: 6px !important;
+  }
+  .artist {
+    font-size: 13px !important;
+  }
+
+  .volume-container {
+    padding-left: 54px !important;
+  }
+ 
 }
 
-@media screen and (max-width: 766px) {
+ 
+
+@media screen and (max-width: 767px) {
   .music-player-menu {
     padding: 0px 40px !important;
   }
@@ -162,6 +188,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     font-size: 20px !important;
     padding: 0px !important;
   }
+
   .artist {
     padding: 0px !important;
     margin-top: 10px !important;

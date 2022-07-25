@@ -12,10 +12,11 @@ import {
 } from "semantic-ui-react";
 import "./musicplayer.css";
 import { useAuth } from "../services/useAuth";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeLow, faVolumeMute } from "@fortawesome/free-solid-svg-icons";
+
 const MusicPlayer = ({
   curPlaying,
   activeSong,
@@ -29,14 +30,29 @@ const MusicPlayer = ({
   const { isAuthed } = useAuth();
   var player = document.getElementById("audio");
   var volControl = document.getElementById("vol-control");
+
   const audioRef = useRef();
+const [completed, setCompleted] = useState(1);
+const [isLoading, setIsLoading] = useState(false);
+const [mute, setMute] = useState(true);
+const [volumeIcon, setVolumeIcon] = useState(false);
+const [marquee, setMarquee] = useState(false);
+  
+  useEffect(() => {
+    var songDiv = document.querySelector('.song-title');
+    var element = document.querySelector(".curplaying-container");
+    var overflowX = element.offsetWidth < element.scrollWidth;
+    if (overflowX) {
+      setMarquee(true);
+    } else {
+      setMarquee(false);
+    }
+ 
+  }, [playSong]);
 
-  const [completed, setCompleted] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [mute, setMute] = useState(true);
-  const [volumeIcon, setVolumeIcon] = useState(false);
-  const [v, setValue] = useState(0.4);
+  
 
+   
   function changeVolume(val) {
     var player = document.getElementById("audio");
     player.volume = val / 100;
@@ -71,6 +87,7 @@ const MusicPlayer = ({
     }
   }
 
+ 
   return (
     <Segment basic padded>
       {isLoading && (
@@ -101,31 +118,72 @@ const MusicPlayer = ({
       />
 
       <Menu stackable widths={3} fixed="bottom" className="footer-menu">
-        <Menu.Item position="left" widths={4}>
-          <Item.Group className="desktop" style={{ minWidth: "100%" }}>
+        <Item.Group
+          className="device"
+          style={{ minWidth: "100%", padding: "16px 16px 12px", margin: "0px" }}
+        >
+          <Item.Content
+            style={{
+              margin: "0px",
+              padding: "0px",
+              minWidth: "100%",
+            }}
+          >
+            <Item.Header
+              className="song-title"
+              style={{
+                minWidth: "100%",
+              }}
+            >
+              {activeSong}
+            </Item.Header>
+            <Item.Extra
+              style={{
+                color: "#f1e9edc4 ",
+                fontSize: "16px",
+                minWidth: "100%",
+                letterSpacing: "1px",
+                fontFamily: "Lato",
+                fontWeight: "lighter",
+                fontVariantCaps: "all-petite-caps",
+                padding: "0px",
+              }}
+            >
+              {curArtist}
+            </Item.Extra>
+          </Item.Content>
+        </Item.Group>
+        <Menu.Item position="left" widths={4} className="desktop">
+          <Item.Group
+            className="desktop"
+            style={{ minWidth: "100%", padding: "0px 15px 0px 15px" }}
+          >
             <Item style={{ minWidth: "100%" }}>
               <Item.Image src={`${albumImage}`} size="tiny" />
               <Item.Content
+                className="curplaying-container"
                 style={{
                   textAlign: "left",
                   margin: "0px",
-                  padding: "0px 0px 0px 12px",
-                  maxWidth: "65%",
+                  padding: "0px 0px 0px 8px",
+                  maxWidth: "70%",
+                  
                 }}
-              >
-                <Item.Header className="song-title">{activeSong}</Item.Header>
+              > 
+               
+                <Item.Header className={"song-title " + ( marquee ? "song-title-animate" : "")}>{activeSong}</Item.Header>
                 <Item.Extra
                   className="artist"
                   style={{
                     color: "#f1e9edc4  ",
-                    fontSize: "13px",
+                    fontSize: "14px",
                     minWidth: "100%",
                     letterSpacing: "1px",
                     fontFamily: "Lato",
                     fontWeight: "lighter",
                     fontVariantCaps: "all-petite-caps",
                     padding: "0px",
-                    marginTop: "-2px",
+                    marginTop: "1px",
                   }}
                 >
                   {curArtist}
@@ -133,37 +191,8 @@ const MusicPlayer = ({
               </Item.Content>
             </Item>
           </Item.Group>
-          {/* <List
-            className="device"
-            size="mini"
-            style={{ minWidth: "80%", padding: "4px 16px" }}
-          >
-            <List.Item
-              className="song-title"
-              style={{
-                minWidth: "100%",
-              }}
-            >
-              {activeSong}
-            </List.Item>
-            <List.Item
-              className="artist"
-              style={{
-                color: "#f1e9edc4  ",
-                fontSize: "13px",
-                minWidth: "100%",
-                letterSpacing: "1px",
-                fontFamily: "Lato",
-                fontWeight: "lighter",
-                fontVariantCaps: "all-petite-caps",
-                padding: "0px",
-                marginTop: "-2px",
-              }}
-            >
-              {curArtist}
-            </List.Item>
-          </List> */}
         </Menu.Item>
+
         <Menu.Item
           style={{
             padding: "16px",
@@ -247,7 +276,7 @@ const MusicPlayer = ({
                         marginRight: "10px",
                         marginTop: "-4px",
                       }}
-                      className="desktop"
+                      className="time desktop"
                     >
                       00:00
                     </p>
@@ -258,7 +287,7 @@ const MusicPlayer = ({
                         marginRight: "10px",
                         marginTop: "-4px",
                       }}
-                      className="desktop"
+                      className="time desktop"
                     >
                       {moment
                         .unix(audioRef.current.currentTime)
@@ -277,7 +306,7 @@ const MusicPlayer = ({
                         marginLeft: "10px",
                         marginTop: "-14px",
                       }}
-                      className="desktop"
+                      className="time desktop"
                     >
                       00:00
                     </p>
@@ -288,7 +317,7 @@ const MusicPlayer = ({
                         marginLeft: "10px",
                         marginTop: "-14px",
                       }}
-                      className="desktop"
+                      className="time desktop"
                     >
                       {moment.unix(audioRef.current.duration).format("mm:ss")}
                     </p>
@@ -359,30 +388,39 @@ const MusicPlayer = ({
           </Grid>
         </Menu.Item>
         <Menu.Item className="desktop">
-          <FontAwesomeIcon
-            icon={volumeIcon ? faVolumeMute : faVolumeLow}
-            size="xl"
-            onClick={() => {
-              toggleMute();
-              handleBarValue();
-            }}
+          <span
+            className="volume-container"
             style={{
-              cursor: "pointer",
-              color: "#E2E1E3D6",
-              padding: "10px 10px",
+              display: "flex",
+              alignItems: "center",
+              paddingLeft: "40px",
             }}
-          />
-          <input
-            id="vol-control"
-            type="range"
-            min="0"
-            max="100"
-            onChange={() => {
-              const initVol = document.getElementById("vol-control").value;
-              changeVolume(initVol);
-              handleInputChange();
-            }}
-          />
+          >
+            <FontAwesomeIcon
+              icon={volumeIcon ? faVolumeMute : faVolumeLow}
+              size="lg"
+              onClick={() => {
+                toggleMute();
+                handleBarValue();
+              }}
+              style={{
+                cursor: "pointer",
+                color: "#E2E1E3D6",
+                width: "30px",
+              }}
+            />
+            <input
+              id="vol-control"
+              type="range"
+              min="0"
+              max="100"
+              onChange={() => {
+                const initVol = document.getElementById("vol-control").value;
+                changeVolume(initVol);
+                handleInputChange();
+              }}
+            />
+          </span>
         </Menu.Item>
       </Menu>
     </Segment>

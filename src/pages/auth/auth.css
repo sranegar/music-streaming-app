@@ -19,6 +19,10 @@
   ) !important;
 }
 
+.ui.modal > .actions {
+  background-color: rgb(202, 202, 202) !important;
+}
+
 .ui.modal > .content {
   background-color: rgb(209, 209, 209) !important;
 }
@@ -29,6 +33,10 @@
 
 input {
   background-color: #efefefea !important;
+}
+
+textarea {
+   background-color: #efefefea !important;
 }
 
  {

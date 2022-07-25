@@ -1,9 +1,3 @@
-/*
-Name: Stephanie Ranegar
-Date: 6/19/2022
-File: createAlbum.js
-Description: This script creates a component for inserting a new album
-*/
 
 import {useState, useEffect} from "react";
 import UseFetch from "../../../services/useFetch";

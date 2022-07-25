@@ -21,22 +21,71 @@ import { useState, useEffect } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../services/useAuth";
 import UseFetch from "../../services/useFetch";
+import CreateArtist from './createArtist';
+import DeleteArtist from './deleteArtist';
+import EditArtist from './editArtist';
 
 const Artist = () => {
   const { user } = useAuth();
   const { pathname } = useLocation();
   const [subHeading, setSubHeading] = useState("All Artists");
   const [artistView, setArtistView] = useState(false);
+  const [activeArtist, setActiveArtist] = useState(""); //the album being edited
+
   const [searchResults, setSearchResults] = useState("");
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [reload, setReload] = useState(false);
+  const [admin, setAdmin] = useState(false);
 
   const { error, isLoading, data: artists, getAll, search } = UseFetch();
 
-
+  const disabled = user.role !== 1;
+   
   
-  useEffect(() => {
+  useEffect(( ) => {
     setSubHeading("All Artists");
     getAll();
-  }, [pathname]);
+     
+  
+  }, [pathname, reload]);
+
+ 
+
+  const handleCreate = (e) => {
+    if (disabled) return;
+    setShowCreateModal(true);
+    setSubHeading("Create Artist");
+  };
+
+  const handleDelete = (e) => {
+    if (disabled) return;
+    let artist = {};
+    ["id", "name", "description", "image"].forEach(function (key) {
+      artist[key] = document.getElementById(
+        `artist-${key}-` + e.target.id
+      ).innerText;
+    });
+    setActiveArtist(artist);
+    setSubHeading("Delete Artist");
+    setShowDeleteModal(true);
+  };
+
+  const handleEdit = (e) => {
+    if (disabled) return;
+    let artist = {};
+    ["id", "name", "description", "image"].forEach(
+      function (key) {
+        artist[key] = document.getElementById(
+          `artist-${key}-` + e.target.id
+        ).innerText;
+      }
+    );
+     setActiveArtist(artist);
+     setShowEditModal(true);
+     setSubHeading("Edit Artist");
+  }
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -123,6 +172,21 @@ const Artist = () => {
               style={{ margin: "5px 0px" }}
             />
           </Segment>
+
+          {!disabled ? (
+            <Grid.Column floated="right">
+              <Button
+                floated="right"
+                size="small"
+                icon="plus"
+                color="green"
+                onClick={handleCreate}
+                content="Create Artist"
+              />
+            </Grid.Column>
+          ) : (
+            ""
+          )}
         </Grid.Row>
 
         <Grid
@@ -132,6 +196,15 @@ const Artist = () => {
             minWidth: "100%",
           }}
         >
+          {showCreateModal && (
+            <CreateArtist
+              showModal={showCreateModal}
+              setReload={setReload}
+              reload={reload}
+              setSubHeading={setSubHeading}
+              setShowModal={setShowCreateModal}
+            />
+          )}
           <Header
             textAlign="left"
             as="h3"
@@ -194,7 +267,7 @@ const Artist = () => {
             textAlign="left"
             as="h4"
             inverted
-            style={{ padding: "10px 30px" }}
+            style={{ padding: "20px 30px" }}
           >
             Artists{" "}
             <span
@@ -221,7 +294,35 @@ const Artist = () => {
         >
           {artists &&
             artists.map((artist, i) => (
-              <Card key={i} raised className="artist-card artist-page-grid">
+              <Card
+                key={artist.id}
+                raised
+                className="artist-card artist-page-grid"
+              >
+                <Card.Content
+                  id={"artist-id-" + artist.id}
+                  style={{ display: "none" }}
+                >
+                  {artist.id}
+                </Card.Content>
+                <Card.Content
+                  id={"artist-name-" + artist.id}
+                  style={{ display: "none" }}
+                >
+                  {artist.name}
+                </Card.Content>
+                <Card.Content
+                  id={"artist-description-" + artist.id}
+                  style={{ display: "none" }}
+                >
+                  {artist.description}
+                </Card.Content>
+                <Card.Content
+                  id={"artist-image-" + artist.id}
+                  style={{ display: "none" }}
+                >
+                  {artist.image}
+                </Card.Content>
                 <NavLink to={`/artists/${artist.id}`}>
                   <Image
                     centered
@@ -244,12 +345,44 @@ const Artist = () => {
                     {artist.name}
                   </Card.Header>
                 </NavLink>
+                {disabled ? (
+                  " "
+                ) : (
+                  <Button.Group inverted basic>
+                    <Button id={artist.id} onClick={handleEdit}>
+                      Edit
+                    </Button>
+                    <Button id={artist.id} onClick={handleDelete}>
+                      Delete
+                    </Button>
+                  </Button.Group>
+                )}
               </Card>
             ))}
         </Card.Group>
       </Grid>
+      {showEditModal && (
+        <EditArtist
+          showModal={showEditModal}
+          setShowModal={setShowEditModal}
+          data={activeArtist}
+          reload={reload}
+          setReload={setReload}
+          setSubHeading={setSubHeading}
+        />
+      )}
+      {showDeleteModal && (
+        <DeleteArtist
+          showModal={showDeleteModal}
+          setShowModal={setShowDeleteModal}
+          data={activeArtist}
+          reload={reload}
+          setReload={setReload}
+          setSubHeading={setSubHeading}
+        />
+      )}
     </Grid>
   );
-};
+};;
 
 export default Artist;

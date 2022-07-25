@@ -99,23 +99,7 @@
   min-width: 12% !important;
 }
 
-/* 
-.ui.form input:not([type]),
-.ui.form input[type="date"],
-.ui.form input[type="datetime-local"],
-.ui.form input[type="email"],
-.ui.form input[type="file"],
-.ui.form input[type="number"],
-.ui.form input[type="password"],
-.ui.form input[type="search"],
-.ui.form input[type="tel"],
-.ui.form input[type="text"],
-.ui.form input[type="time"],
-.ui.form input[type="url"] {
-  background: #efefef;
-  color: #040404;
-} */
-
+ 
 #artist-search-term {
   min-width: 300px;
   color: #e2e1e3d6 ;
@@ -204,6 +188,22 @@ i.icon.play.circle.outline:before {
 
 .field.desktop {
   padding: 0px 4px !important;
+}
+
+span.__json-key__ {
+  color: rgb(0, 0, 0) !important;
+}
+
+span.__json-string__ {
+    color: rgb(0, 0, 0) !important;
+    white-space: normal;
+}
+
+pre.__json-pretty__ {
+  font-family: Lato;
+  letter-spacing: 1px;
+  font-size: 12px;
+ 
 }
 
 @media screen and (max-width: 766px) {

@@ -1,10 +1,3 @@
-/*
-Name: Stephanie Ranegar
-Date: 6/20/2022
-File: editAlbum.js
-Description: This script creates a component that displays a form to edit album information
-*/
-
 import {useState, useEffect} from "react";
 import UseFetch from "../../../services/useFetch";
 import {useNavigate} from "react-router-dom";

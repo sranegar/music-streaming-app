@@ -29,6 +29,7 @@ import {
   faLongArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { logDOM } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 const Signin = () => {
   const [open, setOpen] = useState(true);
@@ -36,7 +37,7 @@ const Signin = () => {
   let navigate = useNavigate();
   let [account, setAccount] = useState(null);
   let from = location.state?.from?.pathname || "/signin";
-  let { isAuthed, login, isLoading, error } = useAuth();
+  let { isAuthed, login, isLoading, error} = useAuth();
 
   // verify a user's username and password by calling the login function
   const verifyAccount = (e) => {
@@ -45,8 +46,12 @@ const Signin = () => {
       // Send the user back to the page they tried to visit when they were
       // redirected to the login page
       navigate(from, { replace: true });
+     
     });
+    
   };
+
+
   // handle the change event in the two text boxes;
   const handleInputChange = (e) => {
     const { name, value } = e.target;
