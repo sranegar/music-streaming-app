@@ -1,10 +1,3 @@
-/*
-Name: Adebayo Onifade
-Date: 6/10/2022
-File: useXmlHttp.js
-Description: Create a service for using XMLHttpRequest object
-*/
-
 import { useState, useEffect } from "react";
 
 const UseXmlHttp = (url, method = "GET", headers = {}) => {

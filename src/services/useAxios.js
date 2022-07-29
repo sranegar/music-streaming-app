@@ -1,10 +1,3 @@
-/*
-Name: Adebayo Onifade
-Date: 6/16/2022
-File: useAxios.js
-Description: Create a service for using axios object
-*/
-
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useAuth } from "./useAuth";

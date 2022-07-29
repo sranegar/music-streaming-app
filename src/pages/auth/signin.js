@@ -1,10 +1,3 @@
-/*
-Name: Stephanie Ranegar
-Date: 6/10/2022
-File: signin.js
-Description: This script creates the sign-in form and logs a user in.
-*/
-
 /* eslint-disable no-sequences */
 // import {Button} from 'react-bootstrap';
 import { useState } from "react";

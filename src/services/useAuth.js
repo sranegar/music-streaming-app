@@ -1,11 +1,3 @@
-/*
-Name: Stephanie Ranegar
-Date: 06/11/2022
-File: userAuth.js
-Description: This script creates a React hook for user authentication. It uses useContext to manage state
- */
-
-//The code was adopted from https://www.jeffedmondson.dev/blog/react-protected-routes/
 import { useState, createContext, useContext } from "react";
 import { settings } from "../config/config";
 

@@ -1,10 +1,3 @@
-/*
-Name: Stephanie Ranegar
-Date: 6/16/2022
-File: useFetch.js
-Description: Create a service for using fetch object
-*/
-
 import {settings} from "../config/config";
 import {useState} from "react";
 import {useAuth} from "./useAuth";
